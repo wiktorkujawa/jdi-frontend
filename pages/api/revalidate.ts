@@ -13,9 +13,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   try {
     // This should be the actual path not a rewritten path
     // e.g. for "/blog/[slug]" this should be "/blog/post-1"
-    await res.revalidate(`/${req.body.slug}`);
+    const slug = req.body.slug[0] ==="/" ? req.body.slug : '/'+req.body.slug;
+    await res.revalidate(slug);
     return res.json({ revalidated: true,
-        message: `Revalidated /${req.body.slug} page`
+        message: `Revalidated ${slug} page`
     });
   } catch (err) {
     // If there was an error, Next.js will continue
