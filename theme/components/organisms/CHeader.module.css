@@ -1,0 +1,18 @@
+.wrapperComponent {
+  @apply bg-menu px-4 z-50;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .logo {
+      height: 60px;
+    }
+  }
+}

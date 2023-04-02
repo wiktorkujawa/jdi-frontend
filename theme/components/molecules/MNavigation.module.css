@@ -1,0 +1,76 @@
+.nav {
+  @apply dark:border-dark-border border-theme-border px-2 py-2 transition-transform duration-300 gap-4 lg:translate-x-0 -translate-x-full;
+  left: 0;
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+  z-index: 50;
+  position: fixed;
+  width: 200px;
+  font-weight: bold;
+  border-width: 1px 1px 1px 0;
+  display: flex;
+  flex-direction: column;
+  @screen lg {
+    height: auto;
+    position: static;
+    flex-direction: row;
+    width: auto;
+    border: none;
+  }
+
+
+  &.openNav {
+    @apply overflow-y-auto rounded-r translate-x-0;
+  }
+
+  .link {
+    display: block;
+    &:hover {
+      @apply text-red-hover bg-opacity-60;
+    }
+  }
+
+
+
+}
+
+.button {
+  @apply lg:hidden block relative w-10 h-10 border rounded;
+
+  .icon {
+    width: 60%;
+    height: 2px;
+    margin: 0 auto;
+
+    &::before, &::after {
+      @apply transition-transform duration-300;
+      position: absolute;
+      content: '';
+      width: inherit;
+      height: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: inherit;
+    }
+
+    &::before {
+      top: 25%;
+    }
+    &::after {
+      bottom: 25%;
+    }
+  }
+
+  &.openButton {
+    .icon {
+      height: 0;
+      &::before {
+        @apply rotate-45 origin-top-left -translate-x-2 translate-y-[1px];
+      }
+      &::after {
+        @apply -rotate-45 origin-bottom-left -translate-x-2;
+      }
+    }
+  }
+  
+}
