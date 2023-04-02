@@ -9,6 +9,10 @@ const nextConfig = {
 
     return config
   },
+  env: {
+    API_URL: process.env.API_URL,
+    MY_SECRET_TOKEN: process.env.MY_SECRET_TOKEN
+  },
   experimental: {
     appDir: true,
   },
