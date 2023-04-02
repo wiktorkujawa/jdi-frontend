@@ -1,4 +1,26 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "files.associations": {
+    "*.css": "postcss",
+    "css": "css"
+  },
+  "scss.validate": false,
+  "stylelint.validate": ["css", "scss"],
+  "editor.tabSize": 2,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "extensions.ignoreRecommendations": true,
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+        "vue-html": "html",
+        "postcss": "css"
+    },
+    "terminal.integrated.commandsToSkipShell": [
+        "language-julia.interrupt"
+    ],
+    "css.lint.unknownAtRules": "ignore",
+    "julia.symbolCacheDownload": true,
+    "julia.enableTelemetry": true,
+    "eslint.format.enable": true,
+    "workbench.statusBar.visible": true
 }

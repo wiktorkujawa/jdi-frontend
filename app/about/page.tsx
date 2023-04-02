@@ -1,21 +1,33 @@
-import styles from "./page.module.css";
-import { notFound } from 'next/navigation';
+import { notFound } from "next/navigation";
 import { Page } from "@/interfaces";
+import React from "react";
+import CCustomComponent from "../components/organisms/CCustomComponent";
+import styles from "theme/about/page.module.css";
+import classNames from "classnames";
 
 const getData = async () => {
-  const res = await fetch(`${process.env.API_URL}pages?where[name][equals]=About`);
+  const res = await fetch(
+    `${process.env.API_URL}pages?where[name][equals]=About`
+  );
 
   const { docs }: Page = await res.json();
-  
+
   return docs;
 };
 
 const About = async () => {
-  const [ data ] = await getData();
+  const [data] = await getData();
 
-  if(!data) {
+  if (!data) {
     notFound();
   }
-  return <main className={styles.main}>{ data?.name }</main>;
+  return (
+    <main className={classNames(styles.main)}>
+      {data.customComponents.map(({ id, ...field }) => {
+        // eslint-disable-next-line react/no-children-prop
+        return <CCustomComponent key={id} field={field} />;
+      })}
+    </main>
+  );
 };
 export default About;

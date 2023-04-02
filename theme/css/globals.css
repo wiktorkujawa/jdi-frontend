@@ -1,0 +1,84 @@
+@import './tailwind.css';
+@import './object/o-aspect-ratio.css';
+@import './object/o-container.css';
+@import './object/o-theme.css';
+@import './object/s-wysiwyg.css';
+
+
+
+:root {
+  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
+    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+
+  --header-height: 65px; /* 53px + 2 * 6px */
+  --scroll-spacing-top: var(--header-height);
+  --subnav-height: 56px;
+  --container-padding-inline: 20px;
+  --container-2xl-content-max-width: 1400px; /* 1440px - 2 * 20px */
+  --container-xl-content-max-width: 1224px; /* 1440px - 2 * 108px */
+  --container-lg-content-max-width: 1016px; /* 1440px - 2 * 212px */
+  --container-md-content-max-width: 808px; /* 1440px - 2 * 316px */
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+main {
+  @apply dark:text-dark-font-primary text-theme-font-primary dark:bg-dark-bg bg-theme-bg;
+  padding-top: calc(var(--header-height) + 15px);
+  min-height: 100vh;
+
+  > :last-child {
+    margin-bottom: 0;
+    padding-bottom: 64px;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.code {
+  font-family: monospace;
+}
+
+.pre {
+  display: block;
+  font-family: monospace;
+  white-space: pre;
+  margin: 1em 0;
+}
+
