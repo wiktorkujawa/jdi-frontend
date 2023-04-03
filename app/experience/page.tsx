@@ -26,20 +26,20 @@ interface IEducation {
 }
 
 const getExperienceData = async () => {
-  const res = await fetch(`${process.env.API_URL}globals/experience`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}globals/experience`);
   const data: IExperience = await res.json();
   return data;
 }
 
 const getEducationData = async () => {
-  const res = await fetch(`${process.env.API_URL}globals/education`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}globals/education`);
   const data: IEducation = await res.json();
   return data;
 }
 
 const getCustomData = async () => {
   const res = await fetch(
-    `${process.env.API_URL}pages?where[slug][equals]=experience`
+    `${process.env.NEXT_PUBLIC_API_URL}pages?where[slug][equals]=experience`
   );
 
   const { docs }: Page = await res.json();

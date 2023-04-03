@@ -6,7 +6,7 @@ type Data = {
 }
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   // Check for secret to confirm this is a valid request
-  if (req.query.secret !== process.env.MY_SECRET_TOKEN) {
+  if (req.query.secret !== process.env.NEXT_PUBLIC_SECRET_TOKEN) {
     return res.status(401).json({ message: 'Invalid token' });
   }
 
