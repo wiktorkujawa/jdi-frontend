@@ -7,7 +7,7 @@ import classNames from "classnames";
 
 const getData = async () => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}pages?where[name][equals]=About`
+    `${process.env.API_URL}pages?where[name][equals]=About`
   );
 
   const { docs }: Page = await res.json();

@@ -6,7 +6,7 @@ type Props = {}
 
 
 const getData = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}globals/brief`);
+  const res = await fetch(`${process.env.API_URL}globals/brief`);
   const data: any = await res.json();
   return data
 }

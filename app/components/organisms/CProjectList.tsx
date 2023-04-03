@@ -3,7 +3,7 @@ import React from 'react'
 import MProjectItem from '../molecules/MProjectItem';
 
 const getProjects = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}projects`);
+  const res = await fetch(`${process.env.API_URL}projects`);
   const { docs }: Project = await res.json();
   return docs;
 };
