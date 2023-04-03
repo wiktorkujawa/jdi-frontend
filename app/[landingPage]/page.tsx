@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { Page } from "@/interfaces";
 import classNames from "classnames";
 import CCustomComponent from "../components/organisms/CCustomComponent";
-const mainPages = ["/", "about"];
+const mainPages = ["/", "about","experience"];
 
 export async function generateStaticParams() {
   const res = await fetch(`${process.env.API_URL}pages`);
