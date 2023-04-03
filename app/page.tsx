@@ -7,7 +7,7 @@ import CProjectList from "./components/organisms/CProjectList";
 import CBrief from "./components/organisms/CBrief";
 
 const getData = async () => {
-  const res = await fetch(`${process.env.API_URL}pages?where[slug][equals]=/`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}pages?where[slug][equals]=/`);
   const { docs }: Page = await res.json();
   return docs;
 };

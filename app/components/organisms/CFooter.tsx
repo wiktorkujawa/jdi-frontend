@@ -34,7 +34,7 @@ interface IFooterData {
 }
 
 const getFooterData = async () => {
-  const res = await fetch(`${process.env.API_URL}globals/footer`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}globals/footer`);
   const data: IFooterData = await res.json();
   return data;
 };
