@@ -26,6 +26,8 @@ COPY . .
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_PUBLIC_API_URL https://p01--jdi-cms--qwbwpdvfsq4j.code.run/api/
+ENV NEXT_PUBLIC_MY_SECRET_TOKEN fa8144f9-d38d-41f0-957d-c41adee6bb48
 
 RUN yarn build
 
