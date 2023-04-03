@@ -3,12 +3,10 @@ import { notFound } from "next/navigation";
 import { Page } from "@/interfaces";
 import classNames from "classnames";
 import CCustomComponent from "../components/organisms/CCustomComponent";
-import getConfig from "next/config";
-const { serverRuntimeConfig } = getConfig();
 const mainPages = ["/", "about"];
 
 export async function generateStaticParams() {
-  const res = await fetch(`${serverRuntimeConfig.API_URL}pages`);
+  const res = await fetch(`${process.env.API_URL}pages`);
   const { docs } = await res.json();
 
   const result = docs.filter((item: any) => !mainPages.includes(item.slug));
