@@ -9,6 +9,11 @@ const nextConfig = {
 
     return config
   },
+  serverRuntimeConfig: {
+    // Will only be available on the server side
+    MY_SECRET_TOKEN: process.env.MY_SECRET_TOKEN,
+    API_URL: process.env.API_URL, // Pass through env variables
+  },
   output: 'standalone',
   experimental: {
     appDir: true,

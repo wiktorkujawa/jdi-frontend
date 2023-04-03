@@ -17,7 +17,7 @@ const nav = [
 ];
 
 const getNavData = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}globals/navigation`);
+  const res = await fetch(`${process.env.API_URL}globals/navigation`);
   return res.json();
 }
 
