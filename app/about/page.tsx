@@ -7,7 +7,12 @@ import classNames from "classnames";
 
 const getData = async () => {
   const res = await fetch(
-    `${process.env.API_URL}pages?where[name][equals]=About`
+    `${process.env.API_URL}pages?where[name][equals]=About`,
+    {
+      next: {
+        revalidate: 60
+      }
+    }
   );
 
   const { docs }: Page = await res.json();

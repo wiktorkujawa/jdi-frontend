@@ -6,7 +6,12 @@ import CCustomComponent from "../components/organisms/CCustomComponent";
 const mainPages = ["/", "about", "experience"];
 
 export async function generateStaticParams() {
-  const res = await fetch(`${process.env.API_URL}pages`);
+  const res = await fetch(`${process.env.API_URL}pages`,
+  {
+    next: {
+      revalidate: 60
+    }
+  });
   const { docs } = await res.json();
 
   const result = docs.filter((item: any) => !mainPages.includes(item.slug));

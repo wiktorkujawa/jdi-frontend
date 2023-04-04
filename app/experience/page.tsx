@@ -26,7 +26,12 @@ interface IEducation {
 }
 
 const getExperienceData = async () => {
-  const res = await fetch(`${process.env.API_URL}globals/experience`);
+  const res = await fetch(`${process.env.API_URL}globals/experience`,
+  {
+    next: {
+      revalidate: 60
+    }
+  });
   const data: IExperience = await res.json();
   return data;
 }

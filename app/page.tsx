@@ -1,28 +1,40 @@
-import Image from "next/image";
-
 import styles from "theme/page.module.css";
 import { Page } from "@/interfaces";
 import CCustomComponent from "./components/organisms/CCustomComponent";
 import CProjectList from "./components/organisms/CProjectList";
-import CBrief from "./components/organisms/CBrief";
+import CHeadingCopyBlock from "./components/organisms/CHeadingCopyBlock";
 
-const getData = async () => {
-  const res = await fetch(`${process.env.API_URL}pages?where[slug][equals]=/`);
+const getCustomData = async () => {
+  const res = await fetch(`${process.env.API_URL}pages?where[slug][equals]=/`,
+  {
+    next: {
+      revalidate: 60
+    }
+  });
   const { docs }: Page = await res.json();
-  return docs;
+  return docs[0]?.customComponents;
 };
 
+const getBriefData = async () => {
+  const res = await fetch(`${process.env.API_URL}globals/brief`);
+  const data: any = await res.json();
+  return data
+}
+
 export default async function Home() {
-  const [data] = await getData();
+  const customData = getCustomData();
+  const briefData = getBriefData();
+
+  // Wait for the promises to resolve
+  const [brief, customComponents] = await Promise.all([briefData, customData]);
 
   return (
     <main className={styles.main}>
-      {/* @ts-expect-error Async Server Component */}
-      <CBrief />
+      <CHeadingCopyBlock field={brief}/>
       {/* @ts-expect-error Async Server Component */}
       <CProjectList />
 
-      {data.customComponents.map(({ id, ...field }) => {
+      {customComponents.map(({ id, ...field }) => {
         return <CCustomComponent key={id} field={field} />;
       })}
     </main>
