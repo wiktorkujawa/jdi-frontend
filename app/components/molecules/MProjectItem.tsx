@@ -13,9 +13,13 @@ const MProjectItem = ({
   field: { media, description, name, button },
   main,
 }: Props) => {
+
   return (
     <article className={`m-project-item text-center lg:w-1/2 px-2 w-full`}>
       <figure>
+        <Link href={'/'}>
+          <h3 className="text-h3">Project 1</h3>
+          <h3 className="text-h3">{name}</h3>
         {media.mimeType.includes("video") ? (
           <video
             className="object-cover h-64 text-center mx-auto"
@@ -28,13 +32,14 @@ const MProjectItem = ({
           />
         ) : (
           <Image
-            className="h-64 object-cover"
+            className="h-64 object-contain mx-auto"
             src={media.sizes.card.url}
             width={media.sizes.card.width}
             height={media.sizes.card.height}
             alt={media.sizes.card.filename}
           />
         )}
+        </Link>
       </figure>
 
       <p className="mt-4">{description}</p>

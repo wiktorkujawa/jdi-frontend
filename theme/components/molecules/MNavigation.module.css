@@ -1,5 +1,5 @@
 .nav {
-  @apply dark:border-dark-border border-theme-border px-2 py-2 transition-transform duration-300 gap-4 lg:translate-x-0 -translate-x-full;
+  @apply transition-transform duration-300 gap-4 lg:translate-x-0 -translate-x-full;
   left: 0;
   top: var(--header-height);
   height: calc(100vh - var(--header-height));
@@ -18,15 +18,15 @@
     border: none;
   }
 
-
   &.openNav {
-    @apply overflow-y-auto rounded-r translate-x-0;
+    @apply overflow-y-auto rounded-r translate-x-0 lg:pt-0 pt-2;
   }
 
   .link {
     display: block;
+    padding: 8px 8px;
     &:hover {
-      @apply text-red-hover bg-opacity-60;
+      @apply text-red-hover bg-opacity-80;
     }
   }
 

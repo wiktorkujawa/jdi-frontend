@@ -1,5 +1,5 @@
 .wrapperComponent {
-  @apply bg-menu px-4 z-50;
+  @apply px-4 z-50;
   position: fixed;
   top: 0;
   left: 0;
