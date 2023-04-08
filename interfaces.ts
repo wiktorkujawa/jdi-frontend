@@ -41,6 +41,11 @@ export interface PageContent {
   name: string,
   slug: string,
   customComponents: any[],
+  meta: {
+    title: string,
+    description: string;
+    image: Upload;
+  },
   createdAt: string,
   updatedAt: string
 };
