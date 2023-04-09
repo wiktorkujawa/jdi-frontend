@@ -23,7 +23,12 @@ export async function generateStaticParams() {
 
 const getData = async (page: string) => {
   const res = await fetch(
-    `${process.env.API_URL}pages?where[slug][equals]=${page}`
+    `${process.env.API_URL}pages?where[slug][equals]=${page}`,
+    {
+      next: {
+        revalidate: 60
+      }
+    }
   );
 
   const { docs }: Page = await res.json();

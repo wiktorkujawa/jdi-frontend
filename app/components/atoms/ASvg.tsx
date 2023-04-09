@@ -1,13 +1,21 @@
 import React, { FC } from 'react'
 import dynamic from 'next/dynamic'
 
-const DynamicComponent = (name:string) => dynamic(() => import(`/public/assets/svg/github.svg`));
-// const DynamicComponent = (name: string) => dynamic(() => import(`/public/assets/svg/${name}.svg`));
+interface IconsClasses {
+  [key: string]: string;
+}
 
-const Asvg:FC<any> = ({ name, ...props}) => {
+const iconsClasses: IconsClasses = {
+  linkedin: 'fill-linkedin',
+  github: 'dark:fill-white'
+};
+
+const DynamicComponent = (name: string) => dynamic(() => import(`/public/assets/svg/${name}.svg`));
+
+const Asvg:FC<any> = ({ name, className, ...props}) => {
   let Icon = DynamicComponent(name)
   return (
-    <Icon {...props}/>
+    <Icon {...props} className={`${iconsClasses[name]} ${className}`}/>
   )
 }
 

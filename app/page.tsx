@@ -16,7 +16,11 @@ const getPageData = async () => {
 };
 
 const getBriefData = async () => {
-  const res = await fetch(`${process.env.API_URL}globals/brief`);
+  const res = await fetch(`${process.env.API_URL}globals/brief`, {
+    next: {
+      revalidate: 60
+    }
+  });
   const data: any = await res.json();
   return data;
 };
@@ -43,25 +47,9 @@ export default async function Home() {
   );
 }
 
+
 export const metadata: Metadata = {
-  title: "My app",
+  title: "just-dev-it.com - My portfolio page",
   description:
     "Explore the portfolio of a skilled web developer showcasing their expertise in creating visually stunning and functional websites. From responsive designs to seamless user experience, discover how this developer can bring your online presence to life. Hire a web developer who can turn your ideas into reality",
-  viewport: "width=device-width, initial-scale=1",
-  icons: [
-    {
-      rel: "icon",
-      sizes: "32x32",
-      type: "image/png",
-      url: "/favicon-32x32.png",
-    },
-    {
-      rel: "icon",
-      sizes: "16x16",
-      type: "image/png",
-      url: "/favicon-16x16.png",
-    },
-    { rel: "manifest", url: "/site.webmanifest" },
-    { rel: "apple-touch-icon", sizes: "180x180", url: "/apple-touch-icon.png" },
-  ],
 };

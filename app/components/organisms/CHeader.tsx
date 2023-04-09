@@ -5,19 +5,12 @@ import Logo from "public/logo.svg";
 import MNavigation from "../molecules/MNavigation";
 import classNames from "classnames";
 
-const nav = [
-  {
-    url: "about",
-    text: "About",
-  },
-  {
-    url: "experience",
-    text: "Experience",
-  },
-];
-
 const getNavData = async () => {
-  const res = await fetch(`${process.env.API_URL}globals/navigation`);
+  const res = await fetch(`${process.env.API_URL}globals/navigation`, {
+    next: {
+      revalidate: 600
+    }
+  });
   return res.json();
 }
 
