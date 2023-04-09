@@ -1,0 +1,11 @@
+.m-project-item {
+  
+}
+
+.m-project-item--header {
+  @apply text-h3;
+  &::after {
+    counter-increment: counter +1;
+    content: counter(counter)!important;
+  }
+}

@@ -3,6 +3,7 @@
 import React from "react";
 import LinkedinIcon from "/public/assets/svg/linkedin.svg";
 import GithubIcon from "/public/assets/svg/github.svg";
+import Asvg from "../atoms/ASvg";
 
 // import AButton from "../atoms/AButton";
 // const Asvg = dynamic(() =>  import("../atoms/ASvg"));
@@ -34,7 +35,12 @@ interface IFooterData {
 }
 
 const getFooterData = async () => {
-  const res = await fetch(`${process.env.API_URL}globals/footer`);
+  const res = await fetch(`${process.env.API_URL}globals/footer`,
+  {
+    next: {
+      revalidate: 600
+    }
+  });
   const data: IFooterData = await res.json();
   return data;
 };
@@ -86,12 +92,11 @@ const CFooter = async () => {
         <div className="flex">
           <p className="font-bold w-28 text-p1">SOCIAL</p>
           <address className="flex gap-x-4">
-            <a href="https://www.linkedin.com/in/wiktor-kujawa-110bb2194/" className="block hover:opacity-70">
-              <LinkedinIcon className="fill-linkedin"/>
-            </a>
-            <a href="https://github.com/wiktorkujawa" className="block hover:opacity-70">
-              <GithubIcon className="dark:fill-white"/>
-            </a>
+            {data?.socials?.map(({ id, name, url }) => (
+              <a className="block" key={id} target="_blank" href={url}>
+                <Asvg name={name} className="hover:opacity-60" />
+              </a>
+            ))}
           </address>
         </div>
       </div>
@@ -100,12 +105,3 @@ const CFooter = async () => {
 };
 
 export default CFooter;
-
-
-// {data?.socials?.map(({ id, name, url }) => (
-//   // <AButton key={id} href={url} iconName={name} />
-//   <a className="block" key={id} target="_blank" href={url}>
-//     {/* <Image src={`/assets/svg/${name}.svg`} width={24} height={24} alt={name} /> */}
-//     {/* <Asvg name={name} /> */}
-//   </a>
-// ))}

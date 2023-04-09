@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import AButton from "../atoms/AButton";
+import styles from 'theme/components/molecules/MProjectItem.module.css'
+import classNames from "classnames";
 
 type Props = {
   field: ProjectContent;
@@ -15,10 +17,10 @@ const MProjectItem = ({
 }: Props) => {
 
   return (
-    <article className={`m-project-item text-center lg:w-1/2 px-2 w-full`}>
+    <article className={classNames(styles['m-project-item'],'text-center lg:w-1/2 px-2 w-full')}>
       <figure>
         <Link href={'/'}>
-          <h3 className="text-h3">Project 1</h3>
+          <h3 className={classNames(styles['m-project-item--header'])}>Project </h3>
           <h3 className="text-h3">{name}</h3>
         {media.mimeType.includes("video") ? (
           <video
