@@ -13,11 +13,14 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "res.cloudinary.com"
-      }
+    // remotePatterns: [
+    //   {
+    //     protocol: "https",
+    //     hostname: "res.cloudinary.com"
+    //   }
+    // ],
+    domains: [
+      "res.cloudinary.com"
     ],
     minimumCacheTTL: 1500000
   }
