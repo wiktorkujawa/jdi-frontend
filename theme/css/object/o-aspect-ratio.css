@@ -12,8 +12,10 @@
 .o-aspect-ratio__content,
 .o-aspect-ratio > iframe,
 .o-aspect-ratio > embed,
+.o-aspect-ratio > video,
 .o-aspect-ratio > object,
 .o-aspect-ratio__content > iframe,
+.o-aspect-ratio__content > video,
 .o-aspect-ratio__content > embed,
 .o-aspect-ratio__content > object {
   bottom: 0;
@@ -36,3 +38,10 @@
     padding-bottom: calc(2 / 3 * 100%);
   }
 }
+
+.o-aspect-ratio--2\:1 {
+  &::before {
+    padding-bottom: calc(1 / 2 * 100%);
+  }
+}
+

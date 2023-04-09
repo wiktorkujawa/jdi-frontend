@@ -62,5 +62,8 @@ export interface Upload {
   updatedAt: string,
   url: string,
   relationTo: string,
-  sizes: any
+  sizes: any,
+  original_doc: {
+    filename: string
+  }
 }
