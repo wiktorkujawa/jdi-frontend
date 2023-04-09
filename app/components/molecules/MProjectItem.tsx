@@ -16,7 +16,8 @@ const MProjectItem = ({
     media: {
       mimeType,
       url,
-      original_doc: { filename }
+      original_doc: { filename },
+      sizes: { thumbnail, tablet, card },
     },
     description,
     name,
@@ -49,10 +50,15 @@ const MProjectItem = ({
                 loop
               />
             ) : (
-              <Image
-                className="o-aspect-ratio__content object-contain mx-auto sm:w-96"
-                src={url}
-                fill
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                loading="lazy"
+                srcSet={`${thumbnail.url} ${thumbnail.width}w ${thumbnail.height}h, ${tablet.url} ${tablet.width}w ${tablet.height}h, ${card.url} ${card.width}w ${card.height}h`}
+                sizes={`(max-width: 640px) ${thumbnail.width}px,
+                (max-width: 1024px) ${tablet.width}px
+                ${card.width}px
+                `}
+                className="o-aspect-ratio__content object-contain mx-auto"
                 alt={filename}
               />
             )}
