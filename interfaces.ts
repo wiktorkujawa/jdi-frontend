@@ -22,15 +22,11 @@ export interface Page extends ApiResponse {
   docs: PageContent[]
 }
 
-export interface Project extends ApiResponse {
-  docs: ProjectContent[]
-}
-
-export interface ProjectContent {
+export interface Project {
   id: string,
-  name: string,
+  name?: string,
   mediaUrl?: string;
-  description: string;
+  description?: string;
   createdAt: string,
   updatedAt: string,
   button: Button,

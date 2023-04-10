@@ -28,7 +28,7 @@ interface ICopy {
 }
 
 type Props = {
-    copy: ICopy[];
+  copy: ICopy[];
 };
 
 const Children: FC<ICopy> = ({
@@ -55,16 +55,22 @@ const Children: FC<ICopy> = ({
     );
   }
   if (type == "upload") {
-    const { mimeType, sizes } = value;
+    const {
+      mimeType,
+      sizes: { thumbnail, tablet, card },
+    } = value;
     if (mimeType.includes("image")) {
       return (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           className="object-cover"
-          width={sizes.thumbnail.width}
-          height={sizes.thumbnail.height}
-          src={sizes.thumbnail.url}
-          alt={sizes.thumbnail.filename}
+          loading="lazy"
+          srcSet={`${thumbnail.url} ${thumbnail.width}w ${thumbnail.height}h, ${tablet.url} ${tablet.width}w ${tablet.height}h, ${card.url} ${card.width}w ${card.height}h`}
+          sizes={`(max-width: 640px) ${thumbnail.width}px,
+                (max-width: 1024px) ${tablet.width}px
+                ${card.width}px
+                `}
+          alt={thumbnail.filename}
         />
       );
     } else {
@@ -131,7 +137,7 @@ const Children: FC<ICopy> = ({
   } else return <div>Dynamic component {relationTo}</div>;
 };
 
-const ORichText: FC<Props> = ({copy}) => {
+const ORichText: FC<Props> = ({ copy }) => {
   return (
     <>
       {copy.map((item, index) => {

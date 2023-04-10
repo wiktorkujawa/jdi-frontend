@@ -30,6 +30,9 @@ export default function RootLayout({
 
 export const metadata: Metadata = {
   viewport: "width=device-width, initial-scale=1",
+  title: "just-dev-it.com - My portfolio page",
+  description:
+    "Explore the portfolio of a skilled web developer showcasing their expertise in creating visually stunning and functional websites. From responsive designs to seamless user experience, discover how this developer can bring your online presence to life. Hire a web developer who can turn your ideas into reality",
   icons: [
     {
       rel: "icon",
