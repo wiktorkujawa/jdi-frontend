@@ -1,3 +1,9 @@
 .c-project-list {
   counter-reset: counter;
 }
+
+.c-project-list--list-counter {
+  counter-reset: counter;
+  display: flex;
+  flex-wrap: wrap;
+}

@@ -1,5 +1,4 @@
-import { ProjectContent } from "@/interfaces";
-import Image from "next/image";
+import { Project } from "@/interfaces";
 import Link from "next/link";
 import React from "react";
 import AButton from "../atoms/AButton";
@@ -7,7 +6,7 @@ import styles from "theme/components/molecules/MProjectItem.module.css";
 import classNames from "classnames";
 
 type Props = {
-  field: ProjectContent;
+  field: Project;
   main?: boolean;
 };
 
