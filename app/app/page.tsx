@@ -1,30 +1,40 @@
 "use client";
+import { useEffect, useState } from "react";
 
-import { useEffect } from "react";
-import { get } from "scriptjs";
 const App = () => {
-  const initWasm = () => {
-    get("assets/wasm/index.js", () => {
-      console.log("index loaded");
-    });
-    get("assets/wasm/runIndex.js", () => {
-      console.log("run index loaded");
-    });
-  };
+
+  const [startApp, setStartApp] = useState(false);
 
   useEffect(() => {
-    initWasm();
-  }, []);
+
+    const InitWasm = async () => {
+      const Module = (await import('scriptjs')).default;
+
+      Module.get("assets/wasm/index.js", () => {
+        console.log("index loaded");
+      });
+      Module.get("assets/wasm/runIndex.js", () => {
+        console.log("run index loaded");
+      });
+    }
+    setTimeout(() => setStartApp(true), 1000);
+    if (typeof document !== 'undefined' && startApp) {
+
+      InitWasm();
+
+      
+    }
+  }, [startApp]);
 
   return (
     <main>
-      <canvas
+      { startApp && <canvas
         className="emscripten"
         id="canvas"
         onContextMenu={(e) => {
           e.preventDefault();
         }}
-      ></canvas>
+      ></canvas>}
     </main>
   );
 };
