@@ -22,6 +22,7 @@ const MProjectItem = ({
     description,
     name,
     button,
+    mediaUrl,
   },
   main,
 }: Props) => {
@@ -29,15 +30,19 @@ const MProjectItem = ({
     <article
       className={classNames(
         styles["m-project-item"],
-        "text-center lg:w-1/2 px-2 w-full"
+        `text-center ${main ? "" : "lg:w-1/2"} px-2 w-full`
       )}
     >
       <figure>
-        <Link href={"/"}>
-          <h3 className={classNames(styles["m-project-item--header"])}>
-            Project{" "}
-          </h3>
-          <h3 className="text-h3">{name}</h3>
+        <Link href={mediaUrl || button.url}>
+          {!main && (
+            <>
+              <h3 className={classNames(styles["m-project-item--header"])}>
+                Project{" "}
+              </h3>
+              <h3 className="text-h3">{name}</h3>
+            </>
+          )}
           <div className="o-aspect-ratio o-aspect-ratio--2:1">
             {mimeType.includes("video") ? (
               <video
@@ -66,7 +71,7 @@ const MProjectItem = ({
         </Link>
       </figure>
 
-      <p className="mt-4">{description}</p>
+     {!main && <p className="mt-4">{description}</p> }
 
       <AButton href={button.url} target="_blank">
         {button.text}

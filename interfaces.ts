@@ -29,6 +29,7 @@ export interface Project extends ApiResponse {
 export interface ProjectContent {
   id: string,
   name: string,
+  mediaUrl?: string;
   description: string;
   createdAt: string,
   updatedAt: string,
