@@ -22,7 +22,7 @@ const CProjectList = async () => {
 
       {main && <MProjectItem key={main.id} field={main} main /> }
 
-      <div className={styles['c-project-list--list-counter']}>
+      <div id="list" className={styles['c-project-list--list-counter']}>
       {
         projectsList?.map((field: Project) => (
           <MProjectItem key={field.id} field={field} />

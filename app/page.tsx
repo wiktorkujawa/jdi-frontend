@@ -35,7 +35,7 @@ export default async function Home() {
   return (
     <>
       <main className={styles.main}>
-        <CHeadingCopyBlock field={briefData} />
+        <CHeadingCopyBlock field={{...briefData, arrowScroll:"list"}} />
         {/* @ts-expect-error Async Server Component */}
         <CProjectList />
 

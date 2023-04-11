@@ -3,6 +3,7 @@
 }
 
 .c-project-list--list-counter {
+  margin-top: 36px;
   counter-reset: counter;
   display: flex;
   flex-wrap: wrap;
