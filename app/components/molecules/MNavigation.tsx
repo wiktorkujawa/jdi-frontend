@@ -49,7 +49,7 @@ const MNavigation: FC<Props> = ({ nav }) => {
         )}
       >
         {nav.map((item) => (
-          <Link className={styles.link} key={item.id} href={item.slug}>
+          <Link onClick={() => setOpenNav(false)} className={styles.link} key={item.id} href={item.slug}>
             {item.name}
           </Link>
         ))}
