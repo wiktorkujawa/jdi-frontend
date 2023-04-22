@@ -1,6 +1,5 @@
-import classNames from "classnames";
-import { CldImage } from "next-cloudinary";
-import Image from "next/image";
+import { ICopy, Upload } from "@/interfaces";
+import { CldImage, CldVideoPlayer } from "next-cloudinary";
 import Link from "next/link";
 import React, { FC } from "react";
 // import styles from 'theme/components/organisms/ORichText.module.css'
@@ -14,18 +13,6 @@ const types = ["p", "h1", "h2", "h3", "h4", "h5", "h6", "ul", "ol", "li"];
 // realtionTo and value -> dynamic component
 
 // children or value
-
-interface ICopy {
-  type?: string;
-  text?: string;
-  value?: any;
-  children?: ICopy[];
-  indent: number;
-  doc?: any;
-  url?: string;
-  relationTo?: string;
-  newTab?: boolean;
-}
 
 type Props = {
   copy: ICopy[];
@@ -57,37 +44,41 @@ const Children: FC<ICopy> = ({
   if (type == "upload") {
     const {
       mimeType,
-      sizes: { thumbnail, tablet, card },
-    } = value;
-    if (mimeType.includes("image")) {
+      cloudinary: { public_id, original_filename, resource_type },
+    }: Upload = value;
+    if (resource_type == "image") {
       return (
         // eslint-disable-next-line @next/next/no-img-element
-        <img
-          className="object-cover"
-          loading="lazy"
-          srcSet={`${thumbnail.url} ${thumbnail.width}w ${thumbnail.height}h, ${tablet.url} ${tablet.width}w ${tablet.height}h, ${card.url} ${card.width}w ${card.height}h`}
-          sizes={`(max-width: 640px) ${thumbnail.width}px,
-                (max-width: 1024px) ${tablet.width}px
-                ${card.width}px
-                `}
-          alt={thumbnail.filename}
-        />
+        // <img
+        //   className="object-cover"
+        //   loading="lazy"
+        //   srcSet={`${thumbnail.url} ${thumbnail.width}w ${thumbnail.height}h, ${tablet.url} ${tablet.width}w ${tablet.height}h, ${card.url} ${card.width}w ${card.height}h`}
+        //   sizes={`(max-width: 640px) ${thumbnail.width}px,
+        //         (max-width: 1024px) ${tablet.width}px
+        //         ${card.width}px
+        //         `}
+        //   alt={thumbnail.filename}
+        // />
+        <div className="bg-dark-bg o-aspect-ratio o-aspect-ratio--2:1">
+          <CldImage
+            className="o-aspect-ratio__content object-cover mx-auto"
+            sizes="100vw"
+            loading="lazy"
+            src={public_id}
+            alt={original_filename}
+            fill
+          />
+        </div>
       );
     } else {
       return (
-        <video
-          controls
-          className="object-cover"
-          width="auto"
-          height="auto"
-          src={value.url}
-        />
+        <CldVideoPlayer controls width="auto" height="auto" src={public_id} />
       );
     }
   }
   if (type == "link") {
     return (
-      <a
+      <Link
         target={newTab ? "_blank" : "_self"}
         href={url || doc?.value?.slug}
         rel="noreferrer"
@@ -95,16 +86,7 @@ const Children: FC<ICopy> = ({
         {children?.map((item, index) => (
           <Children key={index} {...item} />
         ))}
-      </a>
-      // <Link
-      //   target={newTab ? "_blank" : "_self"}
-      //   href={url || doc?.value?.slug}
-      //   rel="noreferrer"
-      // >
-      //   {children?.map((item, index) => (
-      //     <Children key={index} {...item} />
-      //   ))}
-      // </Link>
+      </Link>
     );
   }
   let newIndent = indent;

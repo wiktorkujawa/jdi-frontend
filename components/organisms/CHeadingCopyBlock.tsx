@@ -1,7 +1,11 @@
-import ORichText from "@/app/features/ORichText";
+import { ICopy } from "@/interfaces";
+import dynamic from "next/dynamic";
 import React from "react";
-import Asvg from "../atoms/ASvg";
-import LContainer from "../templates/LContainer";
+
+const ORichText = dynamic(() => import('@/features/ORichText'));
+const Asvg = dynamic(() => import('@/components/atoms/ASvg'));
+const LContainer = dynamic(() => import('@/components/templates/LContainer'));
+
 
 type Props = {
   field: {
@@ -12,18 +16,6 @@ type Props = {
     arrowScroll?: string;
   };
 };
-
-interface ICopy {
-  type?: string;
-  text?: string;
-  value?: any;
-  children?: ICopy[];
-  indent: number;
-  doc?: any;
-  url?: string;
-  relationTo?: string;
-  newTab?: boolean;
-}
 
 const CHeadingCopyBlock = ({ field: { copy, heading, level, blockName, arrowScroll } }: Props) => {
   return (

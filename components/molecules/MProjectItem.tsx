@@ -4,6 +4,7 @@ import React from "react";
 import AButton from "../atoms/AButton";
 import styles from "theme/components/molecules/MProjectItem.module.css";
 import classNames from "classnames";
+import { CldImage, CldVideoPlayer } from "next-cloudinary";
 
 type Props = {
   field: Project;
@@ -13,10 +14,11 @@ type Props = {
 const MProjectItem = ({
   field: {
     media: {
-      mimeType,
-      url,
-      original_doc: { filename },
-      sizes: { thumbnail, tablet, card },
+      cloudinary: {
+        public_id,
+        resource_type,
+        original_filename
+      },
     },
     description,
     name,
@@ -42,35 +44,35 @@ const MProjectItem = ({
               <h3 className="text-h3">{name}</h3>
             </>
           )}
-          <div className="o-aspect-ratio o-aspect-ratio--2:1">
-            {mimeType.includes("video") ? (
-              <video
-                className="o-aspect-ratio--content object-contain text-center mx-auto"
-                width="auto"
-                height="auto"
-                src={url}
-                autoPlay
-                muted
-                loop
-              />
-            ) : (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
+
+          {resource_type === "video" ? (
+            <CldVideoPlayer
+              width={2}
+              height={1}
+              src={public_id}
+              autoPlay="on-scroll"
+              muted
+              loop
+              controls={false}
+            />
+          ) : (
+            <div className="bg-dark-bg o-aspect-ratio o-aspect-ratio--2:1">
+              <CldImage
+                fill
                 loading="lazy"
-                srcSet={`${thumbnail.url} ${thumbnail.width}w ${thumbnail.height}h, ${tablet.url} ${tablet.width}w ${tablet.height}h, ${card.url} ${card.width}w ${card.height}h`}
-                sizes={`(max-width: 640px) ${thumbnail.width}px,
-                (max-width: 1024px) ${tablet.width}px
-                ${card.width}px
+                src={public_id}
+                sizes={`(max-width: 1024px) 100vw,
+                50vw
                 `}
                 className="o-aspect-ratio__content object-contain mx-auto"
-                alt={filename}
+                alt={original_filename}
               />
-            )}
-          </div>
+            </div>
+          )}
         </Link>
       </figure>
 
-     {!main && <p className="mt-4">{description}</p> }
+      {!main && <p className="mt-4">{description}</p>}
 
       <AButton href={button.url} target="_blank">
         {button.text}
