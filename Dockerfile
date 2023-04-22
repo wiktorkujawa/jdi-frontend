@@ -27,6 +27,7 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 ENV API_URL https://p01--jdi-cms--qwbwpdvfsq4j.code.run/api/
+ENV NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME dlznycnmy
 
 RUN yarn build
 
