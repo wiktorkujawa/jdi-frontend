@@ -8,10 +8,22 @@ const nextConfig = {
 
     return config
   },
-  output: 'standalone',
-  experimental: {
-    appDir: true,
+  env: {
+    API_URL: process.env.API_URL,
+    MY_SECRET_TOKEN: process.env.MY_SECRET_TOKEN
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: `${process.env.API_URL}:path*`,
+      },
+    ]
+  },
+  // output: 'standalone',
+  // experimental: {
+  //   appDir: true,
+  // },
   images: {
     remotePatterns: [
       {

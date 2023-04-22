@@ -1,9 +1,8 @@
 // import dynamic from "next/dynamic";
 // import Image from "next/image";
 import React from "react";
-import LinkedinIcon from "/public/assets/svg/linkedin.svg";
-import GithubIcon from "/public/assets/svg/github.svg";
 import Asvg from "../atoms/ASvg";
+// import useSWR from 'swr'
 
 // import AButton from "../atoms/AButton";
 // const Asvg = dynamic(() =>  import("../atoms/ASvg"));
@@ -27,42 +26,42 @@ interface ISocial {
   url: string;
 }
 
-interface IFooterData {
+export interface IFooterData {
   address: IAddress;
   phone: IPhone[];
   emails: IEmail[];
   socials?: ISocial[];
 }
 
-const getFooterData = async () => {
-  const res = await fetch(`${process.env.API_URL}globals/footer`,
-  {
-    next: {
-      revalidate: 600
-    }
-  });
-  const data: IFooterData = await res.json();
-  return data;
-};
 
-const CFooter = async () => {
-  const data = await getFooterData();
+type IProps = {
+  data: IFooterData
+}
+
+// const getFooterData = (url: string) => fetch(url).then((res) => res.json());
+
+const CFooter = ({ data }: IProps) => {
+  // const { data, error, isLoading } = useSWR<IFooterData>('/api/globals/footer', getFooterData);
+
+  // if (error) return <div>failed to load</div>
+  // if (isLoading) return <div>loading...</div>
+
   return (
     <footer className="c-footer dark:bg-dark-bg-window bg-theme-bg-window dark:text-dark-font-primary text-theme-font-primary">
       <div className="o-container o-container--lg child:py-8 child:border-b-1 dark:child:border-dark-border child:border-theme-border last:child:border-none">
         <div className="flex">
           <p className="font-bold w-28 text-p1">ADDRESS</p>
           <address className="text-p1">
-            {data.address.street} <br />
-            {data.address.city} <br />
-            {data.address.country}
+            {data?.address.street} <br />
+            {data?.address.city} <br />
+            {data?.address.country}
           </address>
         </div>
 
         <div className="flex items-center">
           <p className="font-bold w-28 text-p1">PHONE</p>
           <address>
-            {data.phone.map(({ id, number }) => (
+            {data?.phone.map(({ id, number }) => (
               <a
                 className="block hover:text-red-hover text-p1"
                 href={`tel:+${number}`}
@@ -77,7 +76,7 @@ const CFooter = async () => {
         <div className="flex items-center">
           <p className="font-bold w-28 text-p1">EMAIL</p>
           <address>
-            {data.emails.map(({ id, email }) => (
+            {data?.emails.map(({ id, email }) => (
               <a
                 className="block hover:text-red-hover text-p1"
                 href={`mailto:${email}`}

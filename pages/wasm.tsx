@@ -1,7 +1,6 @@
-"use client";
 import { useEffect, useState } from "react";
 
-const App = () => {
+const Wasm = () => {
   const [startApp, setStartApp] = useState(false);
 
   useEffect(() => {
@@ -32,7 +31,7 @@ const App = () => {
             onContextMenu={(e) => {
               e.preventDefault();
             }}
-          ></canvas>
+          />
         </div>
       )}
       </div>
@@ -40,4 +39,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Wasm;

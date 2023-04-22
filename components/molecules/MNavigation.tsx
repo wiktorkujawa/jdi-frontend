@@ -1,4 +1,3 @@
-"use client";
 import classNames from "classnames";
 import Link from "next/link";
 import React, { FC, useEffect, useState } from "react";
