@@ -8,7 +8,6 @@ type Props = {
 };
 
 const CHead = ({ meta: { title, description, image }, slug }: Props) => {
-console.log(image)
   return (
     <Head>
       <title>{title}</title>

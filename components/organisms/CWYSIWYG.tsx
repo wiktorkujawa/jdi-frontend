@@ -32,19 +32,3 @@ const CWYSIWYG: FC<Props> = ({ field: { copy } }) => {
 };
 
 export default CWYSIWYG;
-
-// <CldImage
-//   // className="object-cover"
-//   width={sizes.thumbnail.width}
-//   height={sizes.thumbnail.height}
-//   src={'media/dixllxld7fxy7ugirjhj'}
-//   alt={sizes.thumbnail.filename}
-// />
-// <Image
-//   className="object-cover"
-//   width={sizes.thumbnail.width}
-//   height={sizes.thumbnail.height}
-//   src={'media/dixllxld7fxy7ugirjhj'}
-//   alt={sizes.thumbnail.filename}
-// />
-// media/dixllxld7fxy7ugirjhj

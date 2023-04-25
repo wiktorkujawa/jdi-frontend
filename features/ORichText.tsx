@@ -1,5 +1,5 @@
 import { ICopy, Upload } from "@/interfaces";
-import { CldImage, CldVideoPlayer } from "next-cloudinary";
+import Image from "next/image";
 import Link from "next/link";
 import React, { FC } from "react";
 // import styles from 'theme/components/organisms/ORichText.module.css'
@@ -43,28 +43,14 @@ const Children: FC<ICopy> = ({
   }
   if (type == "upload") {
     const {
-      mimeType,
-      cloudinary: { public_id, original_filename, resource_type },
+      cloudinary: { original_filename, resource_type },
     }: Upload = value;
     if (resource_type == "image") {
       return (
-        // eslint-disable-next-line @next/next/no-img-element
-        // <img
-        //   className="object-cover"
-        //   loading="lazy"
-        //   srcSet={`${thumbnail.url} ${thumbnail.width}w ${thumbnail.height}h, ${tablet.url} ${tablet.width}w ${tablet.height}h, ${card.url} ${card.width}w ${card.height}h`}
-        //   sizes={`(max-width: 640px) ${thumbnail.width}px,
-        //         (max-width: 1024px) ${tablet.width}px
-        //         ${card.width}px
-        //         `}
-        //   alt={thumbnail.filename}
-        // />
         <div className="bg-dark-bg o-aspect-ratio o-aspect-ratio--2:1">
-          <CldImage
+          <Image
             className="o-aspect-ratio__content object-cover mx-auto"
-            sizes="100vw"
-            loading="lazy"
-            src={public_id}
+            src={value.url}
             alt={original_filename}
             fill
           />
@@ -72,7 +58,11 @@ const Children: FC<ICopy> = ({
       );
     } else {
       return (
-        <CldVideoPlayer controls width="auto" height="auto" src={public_id} />
+        <video
+          className="w-full"
+          controls
+          src={value.url}
+        />
       );
     }
   }
@@ -131,19 +121,3 @@ const ORichText: FC<Props> = ({ copy }) => {
 };
 
 export default ORichText;
-
-// <CldImage
-//   // className="object-cover"
-//   width={sizes.thumbnail.width}
-//   height={sizes.thumbnail.height}
-//   src={'media/dixllxld7fxy7ugirjhj'}
-//   alt={sizes.thumbnail.filename}
-// />
-// <Image
-//   className="object-cover"
-//   width={sizes.thumbnail.width}
-//   height={sizes.thumbnail.height}
-//   src={'media/dixllxld7fxy7ugirjhj'}
-//   alt={sizes.thumbnail.filename}
-// />
-// media/dixllxld7fxy7ugirjhj
