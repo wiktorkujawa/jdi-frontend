@@ -7,6 +7,7 @@ module.exports = {
     "./components/molecules/*.{js,ts,jsx,tsx}",
     "./components/atoms/*.{js,ts,jsx,tsx}",
     "./components/templates/*.{js,ts,jsx,tsx}",
+    "./features/*.{js,ts,jsx,tsx}",
   ],
   darkMode: 'class',
   theme: {

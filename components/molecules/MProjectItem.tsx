@@ -46,7 +46,7 @@ const MProjectItem = ({
             <div className="o-aspect-ratio o-aspect-ratio--2:1">      
               <video
                 poster="logowhite.svg"
-                className="o-aspect-ratio__content object-contain mx-auto"
+                className="lazy o-aspect-ratio__content object-contain mx-auto"
                 autoPlay
                 muted
                 loop
