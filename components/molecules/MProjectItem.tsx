@@ -4,7 +4,7 @@ import React from "react";
 import AButton from "../atoms/AButton";
 import styles from "theme/components/molecules/MProjectItem.module.css";
 import classNames from "classnames";
-import { CldImage, CldVideoPlayer } from "next-cloudinary";
+import Image from "next/image";
 
 type Props = {
   field: Project;
@@ -14,11 +14,8 @@ type Props = {
 const MProjectItem = ({
   field: {
     media: {
-      cloudinary: {
-        public_id,
-        resource_type,
-        original_filename
-      },
+      cloudinary: { resource_type, original_filename },
+      url,
     },
     description,
     name,
@@ -46,21 +43,22 @@ const MProjectItem = ({
           )}
 
           {resource_type === "video" ? (
-            <CldVideoPlayer
-              width={2}
-              height={1}
-              src={public_id}
-              autoPlay="on-scroll"
-              muted
-              loop
-              controls={false}
-            />
+            <div className="o-aspect-ratio o-aspect-ratio--2:1">      
+              <video
+                poster="logowhite.svg"
+                className="o-aspect-ratio__content object-contain mx-auto"
+                autoPlay
+                muted
+                loop
+                playsInline 
+                src={url}
+              />
+            </div>
           ) : (
-            <div className="bg-dark-bg o-aspect-ratio o-aspect-ratio--2:1">
-              <CldImage
+            <div className="o-aspect-ratio o-aspect-ratio--2:1">
+              <Image
                 fill
-                loading="lazy"
-                src={public_id}
+                src={url}
                 sizes={`(max-width: 1024px) 100vw,
                 50vw
                 `}
