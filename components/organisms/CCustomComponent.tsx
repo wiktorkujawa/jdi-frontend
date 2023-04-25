@@ -1,13 +1,9 @@
-'use client';
 import React, { FC } from "react";
 // import dynamic from "next/dynamic";
 
 import loadable from '@loadable/component'
 
-const DynamicComponent = loadable((props: any) => import(`./C${props.field.blockType}`), {
-  cacheKey: props => props.field,
-  ssr: false
-})
+const DynamicComponent = loadable((props: any) => import(`./C${props.field.blockType}`));
 
 // const DynamicComponent = (componentName: string) =>
 //   dynamic(() => import(`./C${componentName}`));

@@ -59,7 +59,7 @@ const Children: FC<ICopy> = ({
     } else {
       return (
         <video
-          className="w-full"
+          className="lazy w-full"
           controls
           src={value.url}
         />
