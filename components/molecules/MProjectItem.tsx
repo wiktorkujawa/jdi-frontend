@@ -59,9 +59,9 @@ const MProjectItem = ({
               <Image
                 fill
                 src={url}
-                sizes={`(max-width: 1024px) 100vw,
-                50vw
-                `}
+                // sizes={`(max-width: 1024px) 100vw,
+                // 50vw
+                // `}
                 className="o-aspect-ratio__content object-contain mx-auto"
                 alt={original_filename}
               />
