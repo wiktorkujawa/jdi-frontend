@@ -22,6 +22,7 @@ const nextConfig = {
   // },
   output: 'standalone',
   images: {
+    loader: 'cloudinary',
     // remotePatterns: [
     //   {
     //     protocol: "https",
