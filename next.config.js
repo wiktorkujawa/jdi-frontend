@@ -23,6 +23,7 @@ const nextConfig = {
   output: 'standalone',
   images: {
     loader: 'cloudinary',
+    path: 'https://res.cloudinary.com/dlznycnmy/image/upload',
     // remotePatterns: [
     //   {
     //     protocol: "https",

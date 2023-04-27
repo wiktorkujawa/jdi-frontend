@@ -16,7 +16,7 @@ const MProjectItem = ({
     media: {
       cloudinary: { resource_type, original_filename },
       url,
-      filename
+      filename,
     },
     description,
     name,
@@ -44,25 +44,28 @@ const MProjectItem = ({
           )}
 
           {resource_type === "video" ? (
-            <div className="o-aspect-ratio o-aspect-ratio--2:1">      
+            <div className="o-aspect-ratio o-aspect-ratio--2:1">
               <video
                 poster="logowhite.svg"
                 className="lazy o-aspect-ratio__content object-contain mx-auto"
                 autoPlay
                 muted
                 loop
-                playsInline 
+                playsInline
                 src={url}
               />
             </div>
           ) : (
             <div className="o-aspect-ratio o-aspect-ratio--2:1">
               <Image
+                // loader={({ src, width, quality }) => {
+                //   const params = ['f_auto', 'c_limit', `w_${width}`, `q_${quality || 'auto'}`]
+                //   return `https://res.cloudinary.com/dlznycnmy/image/upload/${params.join(',')}/${src}`
+                // }}
                 fill
-                src={url}
-                sizes={`(max-width: 1024px) 100vw,
-                50vw
-                `}
+                // src={url}
+                src={"/" + filename}
+                sizes={`(max-width: 1024px) 100vw, 50vw`}
                 className="o-aspect-ratio__content object-contain mx-auto"
                 alt={original_filename}
               />
