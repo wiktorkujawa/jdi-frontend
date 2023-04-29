@@ -1,6 +1,36 @@
-import { useEffect, useState } from "react";
+import CFooter, { IFooterData } from "@/components/organisms/CFooter";
+import CHeader from "@/components/organisms/CHeader";
+import { getLayout } from "@/features/LayoutData";
+import { IData, Page } from "@/interfaces";
+import { FC, useEffect, useState } from "react";
 
-const Wasm = () => {
+export const getStaticProps = async () => {
+
+  const getPageData = async () => {
+    const res = await fetch(
+      `${process.env.API_URL}pages?where[slug][equals]=wasm`
+    );
+    const { docs }: Page = await res.json();
+    return docs[0];
+  };
+
+  const [ layoutData] = await Promise.all([
+    // getPageData(),
+    getLayout()
+  ]);
+
+  return {
+    props: {
+      layoutData,
+    },
+  };
+};
+
+type IProps = {
+  layoutData: [IData, IFooterData];
+};
+
+const Wasm: FC<IProps> = ({ layoutData: [navData, footerData] }) => {
   const [startApp, setStartApp] = useState(false);
 
   useEffect(() => {
@@ -21,21 +51,25 @@ const Wasm = () => {
   }, [startApp]);
 
   return (
-    <main>
-      <div>
-      {startApp && (
-        <div className="mx-4 overflow-x-auto">
-          <canvas
-            className="emscripten min-w-[1024px]"
-            id="canvas"
-            onContextMenu={(e) => {
-              e.preventDefault();
-            }}
-          />
+    <>
+      <CHeader data={navData} />
+      <main>
+        <div>
+          {startApp && (
+            <div className="mx-4 overflow-x-auto">
+              <canvas
+                className="emscripten min-w-[1024px]"
+                id="canvas"
+                onContextMenu={(e) => {
+                  e.preventDefault();
+                }}
+              />
+            </div>
+          )}
         </div>
-      )}
-      </div>
-    </main>
+      </main>
+      <CFooter data={footerData} />
+    </>
   );
 };
 
