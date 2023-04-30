@@ -5,5 +5,5 @@ interface Loader {
 }
 export default function cloudinaryLoader({ src, width, quality }: Loader) {
   const params = ['f_auto', 'c_limit', `w_${width}`, `q_${quality || 'auto'}`]
-  return `${process.env.CLOUDINARY_URL}${params.join(',')}/${src}`
+  return `https://res.cloudinary.com/dlznycnmy/image/upload/${params.join(',')}/${src}`
 }
