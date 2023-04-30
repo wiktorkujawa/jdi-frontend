@@ -16,6 +16,7 @@ const MProjectItem = ({
     media: {
       cloudinary: { resource_type, original_filename },
       url,
+      filename
     },
     description,
     name,
@@ -58,10 +59,8 @@ const MProjectItem = ({
             <div className="o-aspect-ratio o-aspect-ratio--2:1">
               <Image
                 fill
-                src={url}
-                sizes={`(max-width: 1024px) 100vw,
-                50vw
-                `}
+                src={filename}
+                sizes={`(max-width: 1024px) 100vw, 50vw`}
                 className="o-aspect-ratio__content object-contain mx-auto"
                 alt={original_filename}
               />

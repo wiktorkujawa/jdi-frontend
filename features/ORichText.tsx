@@ -49,21 +49,16 @@ const Children: FC<ICopy> = ({
       return (
         <div className="bg-dark-bg o-aspect-ratio o-aspect-ratio--2:1">
           <Image
-            className="o-aspect-ratio__content object-cover mx-auto"
-            src={value.url}
-            alt={original_filename}
             fill
+            src={value.filename}
+            sizes={`(max-width: 1024px) 100vw, 50vw`}
+            className="o-aspect-ratio__content object-cover mx-auto"
+            alt={original_filename}
           />
         </div>
       );
     } else {
-      return (
-        <video
-          className="lazy w-full"
-          controls
-          src={value.url}
-        />
-      );
+      return <video className="lazy w-full" controls src={value.url} />;
     }
   }
   if (type == "link") {
