@@ -10,21 +10,13 @@ const nextConfig = {
   },
   env: {
     API_URL: process.env.API_URL,
-    MY_SECRET_TOKEN: process.env.MY_SECRET_TOKEN
+    MY_SECRET_TOKEN: process.env.MY_SECRET_TOKEN,
+    CLOUDINARY_URL: process.env.CLOUDINARY_URL
   },
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '/api/:path*',
-  //       destination: `${process.env.API_URL}:path*`,
-  //     },
-  //   ]
-  // },
   output: 'standalone',
-  // experimental: {
-  //   appDir: true,
-  // },
   images: {
+    loader: 'custom',
+    loaderFile: './loader.ts',
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
