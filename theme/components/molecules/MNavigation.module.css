@@ -24,6 +24,16 @@
 
   .link {
     display: block;
+    cursor: pointer;
+    padding: 8px 8px;
+    &:hover {
+      @apply text-red-hover bg-opacity-80;
+    }
+  }
+
+  .sublink {
+    display: block;
+    white-space: nowrap;
     padding: 8px 8px;
     &:hover {
       @apply text-red-hover bg-opacity-80;
