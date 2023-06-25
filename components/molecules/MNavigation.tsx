@@ -68,7 +68,7 @@ const MNavigation: FC<Props> = ({ nav }) => {
               <Link
                 onClick={() => setOpenNav(false)}
                 className={styles.link}
-                href={"/" + item.slug}
+                href={item.slug[0]=="/" ? item.slug : `/${item.slug}`}
               >
                 {item.name}
               </Link>

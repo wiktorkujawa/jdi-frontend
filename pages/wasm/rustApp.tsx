@@ -3,7 +3,7 @@ import CHeader from "@/components/organisms/CHeader";
 import { getLayout } from "@/features/LayoutData";
 import { IData, Page } from "@/interfaces";
 import { FC, useEffect, useRef } from "react";
-import init from "@/public/assets/wasm/web/wasm-test";
+import init from "@/public/assets/wasm/web/eframe_template";
 
 export const getStaticProps = async () => {
   const getPageData = async () => {
@@ -31,28 +31,25 @@ type IProps = {
 };
 
 const Wasm: FC<IProps> = ({ layoutData: [navData, footerData] }) => {
-  const appRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (typeof document !== "undefined") {
+    // if (typeof document !== "undefined") {
       init().catch((error) => {
         if (!error.message.startsWith("Using exceptions for control flow,")) {
           throw error;
         }
-      }).finally(() => {
-        const canvas = document.querySelector("canvas") as unknown;
-        appRef.current?.appendChild(canvas as HTMLCanvasElement);
       });
-    }
+    // }
   }, []);
 
   return (
     <>
       <CHeader data={navData} />
       <main>
-        <div>
-            <div ref={appRef} className="mx-4 overflow-x-auto child:mx-auto"/>
-        </div>
+      <div className="relative h-screen o-container o-container--lg my-16">
+        <canvas className="absolute left-0 top-0 w-full h-full" id="the_canvas_id"/>
+      </div>
+      <div/>
       </main>
       <CFooter data={footerData} />
     </>
