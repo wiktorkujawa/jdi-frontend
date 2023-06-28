@@ -38,6 +38,9 @@ module.exports = {
       borderWidth: {
         1: '1px'
       },
+      maxWidth: {
+        'wasm-app': 'calc(100% - 50px)'
+      },
       fontSize: {
         h1: [`${40 / 16}rem`, {
           lineHeight: '1.5'
