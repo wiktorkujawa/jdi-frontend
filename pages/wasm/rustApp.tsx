@@ -47,7 +47,7 @@ const Wasm: FC<IProps> = ({ layoutData: [navData, footerData] }) => {
       <CHeader data={navData} />
       <main>
       <div className="relative h-screen o-container o-container--lg my-16">
-        <canvas className="absolute left-0 top-0 w-full h-full" id="the_canvas_id"/>
+        <canvas className="absolute left-1/2 -translate-x-1/2 top-0 w-full max-w-wasm-app h-full" id="the_canvas_id"/>
       </div>
       <div/>
       </main>

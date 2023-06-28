@@ -61,7 +61,7 @@ const MNavigation: FC<Props> = ({ nav }) => {
             key={item.id}
           >
             {item.slug == "wasm" ? (
-              <div onClick={() => setOpenNav(false)} className={styles.link}>
+              <div className={styles.link}>
                 {item.name}
               </div>
             ) : (
@@ -76,10 +76,10 @@ const MNavigation: FC<Props> = ({ nav }) => {
 
             {item.slug == "wasm" ? (
               <div className="md:absolute min-w-full md:text-center md:pl-0 pl-5 right-0 top-full z-50 dark:bg-dark-bg-window bg-theme-bg-window">
-                <Link className={styles.sublink} href={"/wasm/rustApp"}>
+                <Link onClick={() => setOpenNav(false)} className={styles.sublink} href={"/wasm/rustApp"}>
                   Rust App
                 </Link>
-                <Link className={styles.sublink} href={"/wasm/cApp"}>
+                <Link onClick={() => setOpenNav(false)} className={styles.sublink} href={"/wasm/cApp"}>
                   C App
                 </Link>
               </div>
