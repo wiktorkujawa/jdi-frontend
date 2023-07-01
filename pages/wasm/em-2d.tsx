@@ -10,7 +10,7 @@ import LCustomComponents from "@/components/templates/LCustomComponents";
 export const getStaticProps = async () => {
   const getPageData = async () => {
     const res = await fetch(
-      `${process.env.API_URL}pages?where[slug][equals]=wasm`
+      `${process.env.API_URL}pages?where[slug][equals]=wasm%2Fem-2d`
     );
     const { docs }: Page = await res.json();
     return docs[0];
@@ -34,7 +34,7 @@ type IProps = {
   layoutData: [IData, IFooterData];
 };
 
-const Wasm: FC<IProps> = ({
+const EM2D: FC<IProps> = ({
   layoutData: [navData, footerData],
   pageData: { customComponents, slug, meta },
 }) => {
@@ -53,7 +53,7 @@ const Wasm: FC<IProps> = ({
       {meta && <CHead meta={meta} slug={slug} />}
       <CHeader data={navData} />
       <main>
-        <div className="relative h-screen o-container o-container--lg my-16">
+        <div className="relative h-screen o-container o-container--2xl my-16">
           <canvas
             className="absolute left-1/2 -translate-x-1/2 top-0 w-full max-w-wasm-app h-full"
             id="the_canvas_id"
@@ -67,4 +67,4 @@ const Wasm: FC<IProps> = ({
   );
 };
 
-export default Wasm;
+export default EM2D;

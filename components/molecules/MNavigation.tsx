@@ -12,7 +12,10 @@ interface INav {
   id: string;
   name: string;
   slug: string;
+  subpages?: INav[];
 }
+
+const relativeLink = (link: string) => link[0] == "/" ? link : `/${link}`;
 
 const MNavigation: FC<Props> = ({ nav }) => {
   const [openNav, setOpenNav] = useState(false);
@@ -57,33 +60,33 @@ const MNavigation: FC<Props> = ({ nav }) => {
       >
         {nav.map((item) => (
           <div
-            className="child:hidden child:hover:block relative"
+            className="lg:child:hidden lg:child:hover:block relative"
             key={item.id}
           >
-            {item.slug == "wasm" ? (
-              <div onClick={() => setOpenNav(false)} className={styles.link}>
-                {item.name}
-              </div>
-            ) : (
-              <Link
-                onClick={() => setOpenNav(false)}
-                className={styles.link}
-                href={item.slug[0]=="/" ? item.slug : `/${item.slug}`}
-              >
-                {item.name}
-              </Link>
-            )}
+            <Link
+              onClick={() => setOpenNav(false)}
+              className={styles.link}
+              href={relativeLink(item.slug)}
+            >
+              {item.name}
+            </Link>
 
-            {item.slug == "wasm" ? (
-              <div className="md:absolute min-w-full md:text-center md:pl-0 pl-5 right-0 top-full z-50 dark:bg-dark-bg-window bg-theme-bg-window">
-                <Link className={styles.sublink} href={"/wasm/rustApp"}>
-                  Rust App
-                </Link>
-                <Link className={styles.sublink} href={"/wasm/cApp"}>
-                  C App
-                </Link>
+            {item?.subpages && (
+              <div className="lg:absolute min-w-full lg:text-center lg:pl-0 pl-5 right-0 top-full z-50 dark:bg-dark-bg-window bg-theme-bg-window">
+                {item?.subpages?.map((subpage) => {
+                  return (
+                    <Link
+                      key={subpage.id}
+                      onClick={() => setOpenNav(false)}
+                      className={styles.sublink}
+                      href={relativeLink(subpage.slug)}
+                    >
+                      {subpage.name}
+                    </Link>
+                  );
+                })}
               </div>
-            ) : null}
+            )}
           </div>
         ))}
       </nav>
