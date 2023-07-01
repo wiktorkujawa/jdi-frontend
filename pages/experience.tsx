@@ -1,11 +1,11 @@
 import { IData, Page, PageContent } from "@/interfaces";
 import React, { FC } from "react";
-import CCustomComponent from "../components/organisms/CCustomComponent";
 import LContainer from "../components/templates/LContainer";
 import CHead from "@/components/organisms/CHead";
 import { getLayout } from "@/features/LayoutData";
 import CHeader from "@/components/organisms/CHeader";
 import CFooter, { IFooterData } from "@/components/organisms/CFooter";
+import LCustomComponents from "@/components/templates/LCustomComponents";
 
 interface IExperience {
   header: string;
@@ -118,9 +118,7 @@ const Experience: FC<IProps> = ({
             </ul>
           </LContainer>
         </section>
-        {customComponents?.map(({ id, ...field }: any) => {
-          return <CCustomComponent key={id} field={field} />;
-        })}
+        <LCustomComponents field={customComponents} />
       </main>
       <CFooter data={footerData} />
     </>
