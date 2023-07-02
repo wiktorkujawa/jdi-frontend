@@ -55,7 +55,7 @@ const EM2D: FC<IProps> = ({
       <main>
         <div className="relative h-screen o-container o-container--2xl my-16">
           <canvas
-            className="absolute left-1/2 -translate-x-1/2 top-0 w-full max-w-wasm-app h-full"
+            className="absolute left-1/2 -translate-x-1/2 top-0 max-w-wasm-app h-full"
             id="the_canvas_id"
           />
         </div>
