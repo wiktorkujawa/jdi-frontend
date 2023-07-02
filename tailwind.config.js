@@ -39,7 +39,7 @@ module.exports = {
         1: '1px'
       },
       maxWidth: {
-        'wasm-app': 'calc(100% - 50px)'
+        'wasm-app': 'calc(100% - 15px)'
       },
       fontSize: {
         h1: [`${40 / 16}rem`, {
