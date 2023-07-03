@@ -83,7 +83,7 @@ const MNavigation: FC<Props> = ({ nav }) => {
             </Link>
 
             {page?.subpages && (
-              <div className="lg:absolute min-w-full lg:text-center lg:pl-0 pl-5 right-0 top-full lg:mt-4 z-50 dark:bg-dark-bg-window bg-theme-bg-window">
+              <div className="lg:absolute min-w-full lg:text-center lg:pl-0 pl-5 right-0 top-full lg:pt-4 z-50 dark:bg-dark-bg-window bg-theme-bg-window">
                 {page?.subpages?.map((subpage) => {
                   return (
                     <Link

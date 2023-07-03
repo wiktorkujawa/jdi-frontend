@@ -5,7 +5,7 @@
   height: calc(100vh - var(--header-height));
   z-index: 50;
   position: fixed;
-  width: 200px;
+  width: 250px;
   font-weight: bold;
   border-width: 1px 1px 1px 0;
   display: flex;
@@ -28,7 +28,7 @@
   .link {
     display: block;
     cursor: pointer;
-    padding: 8px 8px;
+    padding: 8px 16px;
     &:hover {
       @apply text-red-hover bg-opacity-80;
     }
