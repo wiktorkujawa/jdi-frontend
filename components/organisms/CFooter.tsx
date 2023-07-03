@@ -33,10 +33,9 @@ export interface IFooterData {
   socials?: ISocial[];
 }
 
-
 type IProps = {
-  data: IFooterData
-}
+  data: IFooterData;
+};
 
 // const getFooterData = (url: string) => fetch(url).then((res) => res.json());
 
@@ -67,7 +66,9 @@ const CFooter = ({ data }: IProps) => {
                 href={`tel:+${number}`}
                 key={id}
               >
-                +{number}
+                {`+${number}`.match(/.{1,3}/g)?.map((item, index) => (
+                  <span className="pr-2" key={index}>{item}</span>
+                ))}
               </a>
             ))}
           </address>

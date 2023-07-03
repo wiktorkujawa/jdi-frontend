@@ -33,21 +33,21 @@ const MProjectItem = ({
       )}
     >
       <figure>
-        <Link href={mediaUrl || button.url}>
+        <Link target="_blank" href={mediaUrl || button.url}>
           {!main && (
             <>
               <h3 className={classNames(styles["m-project-item--header"])}>
                 Project{" "}
               </h3>
-              <h3 className="text-h3">{name}</h3>
+              <h3 className="text-h3 font-bold">{name}</h3>
             </>
           )}
 
           {resource_type === "video" ? (
-            <div className="o-aspect-ratio o-aspect-ratio--2:1">      
+            <div className="o-aspect-ratio o-aspect-ratio--2:1 overflow-hidden">      
               <video
                 poster="logowhite.svg"
-                className="lazy o-aspect-ratio__content object-contain mx-auto"
+                className="lazy o-aspect-ratio__content object-contain mx-auto hover:scale-150 transition-transform"
                 autoPlay
                 muted
                 loop
@@ -56,12 +56,12 @@ const MProjectItem = ({
               />
             </div>
           ) : (
-            <div className="o-aspect-ratio o-aspect-ratio--2:1">
+            <div className="o-aspect-ratio o-aspect-ratio--2:1 overflow-hidden">
               <Image
                 fill
                 src={filename}
                 sizes={`(max-width: 1024px) 100vw, 50vw`}
-                className="o-aspect-ratio__content object-contain mx-auto"
+                className="o-aspect-ratio__content object-contain mx-auto hover:scale-150 transition-transform"
                 alt={original_filename}
               />
             </div>
