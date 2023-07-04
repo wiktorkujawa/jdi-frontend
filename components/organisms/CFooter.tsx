@@ -2,7 +2,7 @@
 // import Image from "next/image";
 import React from "react";
 import Asvg from "../atoms/ASvg";
-// import useSWR from 'swr'
+import useSWR from 'swr'
 
 // import AButton from "../atoms/AButton";
 // const Asvg = dynamic(() =>  import("../atoms/ASvg"));
@@ -33,17 +33,14 @@ export interface IFooterData {
   socials?: ISocial[];
 }
 
-type IProps = {
-  data: IFooterData;
-};
 
-// const getFooterData = (url: string) => fetch(url).then((res) => res.json());
+const getFooterData = (url: string) => fetch(url).then((res) => res.json());
 
-const CFooter = ({ data }: IProps) => {
-  // const { data, error, isLoading } = useSWR<IFooterData>('/api/globals/footer', getFooterData);
+const CFooter = () => {
+  const { data, error, isLoading } = useSWR<IFooterData>(process.env.API_URL+'globals/footer', getFooterData);
 
-  // if (error) return <div>failed to load</div>
-  // if (isLoading) return <div>loading...</div>
+  if (error) return <div>failed to load</div>
+  if (isLoading) return <div>loading...</div>
 
   return (
     <footer className="c-footer dark:bg-dark-bg-window bg-theme-bg-window dark:text-dark-font-primary text-theme-font-primary">

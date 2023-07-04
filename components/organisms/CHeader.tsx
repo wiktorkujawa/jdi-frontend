@@ -1,23 +1,18 @@
-import React, { FC } from "react";
+import React from "react";
 import styles from "theme/components/organisms/CHeader.module.css";
 import Link from "next/link";
 import Logo from "public/logo.svg";
 import MNavigation from "../molecules/MNavigation";
 import classNames from "classnames";
-import { IData } from "@/interfaces";
-// import useSWR from 'swr'
-// const getNavData = (url: string) => fetch(url).then((res) => res.json());
+import useSWR from 'swr'
+const getNavData = (url: string) => fetch(url).then((res) => res.json());
 
-type IProps = {
-  data: IData
-}
-
-const CHeader:FC<IProps> = ({ data: { page, pages } }) => {
+const CHeader = () => {
   
-  // const { data, error, isLoading } = useSWR('/api/globals/navigation', getNavData)
+  const { data, error, isLoading } = useSWR(process.env.API_URL+'globals/navigation', getNavData)
  
-  // if (error) return <div>failed to load</div>
-  // if (isLoading) return <div>loading...</div>
+  if (error) return <div>failed to load</div>
+  if (isLoading) return <div>loading...</div>
 
   return (
     <header
@@ -30,7 +25,7 @@ const CHeader:FC<IProps> = ({ data: { page, pages } }) => {
         <Link href={"/"}>
           <Logo className={classNames(styles.logo, "dark:fill-white")} />
         </Link>
-        <MNavigation nav={[...page, ...pages]} />
+        <MNavigation nav={[...data.page, ...data.pages]} />
       </div>
     </header>
   );

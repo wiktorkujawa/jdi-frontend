@@ -1,14 +1,10 @@
-import CFooter, { IFooterData } from "@/components/organisms/CFooter";
 import CHead from "@/components/organisms/CHead";
-import CHeader from "@/components/organisms/CHeader";
 import CHeadingCopyBlock from "@/components/organisms/CHeadingCopyBlock";
 import CProjectList from "@/components/organisms/CProjectList";
 import LCustomComponents from "@/components/templates/LCustomComponents";
-import { getLayout } from "@/features/LayoutData";
 import {
   Button,
   ICopy,
-  IData,
   Page,
   PageContent,
   Project,
@@ -35,19 +31,17 @@ export const getStaticProps = async () => {
     return res.json();
   };
 
-  const [briefData, pageData, projectsData, layoutData] = await Promise.all([
+  const [briefData, pageData, projectsData] = await Promise.all([
     getBriefData(),
     getPageData(),
     getProjectsData(),
-    getLayout(),
   ]);
 
   return {
     props: {
       briefData,
       pageData,
-      projectsData,
-      layoutData,
+      projectsData
     },
   };
 };
@@ -72,25 +66,21 @@ type IProps = {
     button: Button;
     media: Upload;
   };
-  layoutData: [IData, IFooterData];
 };
 
 const Home: FC<IProps> = ({
   briefData,
   pageData: { customComponents, meta, slug },
-  projectsData,
-  layoutData: [navData, footerData],
+  projectsData
 }) => {
   return (
     <>
       {meta && <CHead meta={meta} slug={slug} />}
-      <CHeader data={navData} />
       <main className={styles.main}>
         <CHeadingCopyBlock field={{ ...briefData, arrowScroll: "list" }} />
         <CProjectList field={projectsData} />
         <LCustomComponents field={customComponents} />
       </main>
-      <CFooter data={footerData} />
     </>
   );
 };

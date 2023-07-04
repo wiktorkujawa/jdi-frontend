@@ -1,9 +1,6 @@
-import CFooter, { IFooterData } from "@/components/organisms/CFooter";
 import CHead from "@/components/organisms/CHead";
-import CHeader from "@/components/organisms/CHeader";
 import LCustomComponents from "@/components/templates/LCustomComponents";
-import { getLayout } from "@/features/LayoutData";
-import { IData, Page, PageContent } from "@/interfaces";
+import { Page, PageContent } from "@/interfaces";
 import classNames from "classnames";
 import React, { FC } from "react";
 import styles from "theme/[landingPage]/page.module.css";
@@ -37,36 +34,30 @@ export const getStaticProps = async (context: any) => {
     return docs;
   };
 
-  const [pageData, layoutData] = await Promise.all([
+  const [pageData] = await Promise.all([
     getPageData(context?.params?.landingPage),
-    getLayout(),
   ]);
 
   return {
     props: {
-      pageData: pageData[0],
-      layoutData,
+      pageData: pageData[0]
     },
   };
 };
 
 type IProps = {
   pageData: PageContent;
-  layoutData: [IData, IFooterData];
 };
 
 const LandingPage: FC<IProps> = ({
-  pageData: { meta, customComponents, slug },
-  layoutData: [navData, footerData],
+  pageData: { meta, customComponents, slug }
 }) => {
   return (
     <>
       {meta && <CHead meta={meta} slug={slug} />}
-      <CHeader data={navData} />
       <main className={classNames(styles.main)}>
         <LCustomComponents field={customComponents} />
       </main>
-      <CFooter data={footerData} />
     </>
   );
 };

@@ -1,7 +1,4 @@
-import CFooter, { IFooterData } from "@/components/organisms/CFooter";
-import CHeader from "@/components/organisms/CHeader";
-import { getLayout } from "@/features/LayoutData";
-import { IData, Page, PageContent } from "@/interfaces";
+import { Page, PageContent } from "@/interfaces";
 import { FC, useEffect } from "react";
 import init from "@/public/assets/wasm/web/eframe_template";
 import CHead from "@/components/organisms/CHead";
@@ -16,14 +13,12 @@ export const getStaticProps = async () => {
     return docs[0];
   };
 
-  const [pageData, layoutData] = await Promise.all([
+  const [pageData] = await Promise.all([
     getPageData(),
-    getLayout(),
   ]);
 
   return {
     props: {
-      layoutData,
       pageData,
     },
   };
@@ -31,11 +26,9 @@ export const getStaticProps = async () => {
 
 type IProps = {
   pageData: PageContent;
-  layoutData: [IData, IFooterData];
 };
 
 const EM2D: FC<IProps> = ({
-  layoutData: [navData, footerData],
   pageData: { customComponents, slug, meta },
 }) => {
   useEffect(() => {
@@ -51,7 +44,6 @@ const EM2D: FC<IProps> = ({
   return (
     <>
       {meta && <CHead meta={meta} slug={slug} />}
-      <CHeader data={navData} />
       <main>
         <div className="relative h-screen o-container o-container--2xl my-16">
           <canvas
@@ -62,7 +54,6 @@ const EM2D: FC<IProps> = ({
         <div />
         <LCustomComponents field={customComponents} />
       </main>
-      <CFooter data={footerData} />
     </>
   );
 };

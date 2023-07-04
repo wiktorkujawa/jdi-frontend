@@ -1,9 +1,6 @@
-import CFooter, { IFooterData } from "@/components/organisms/CFooter";
 import CHead from "@/components/organisms/CHead";
-import CHeader from "@/components/organisms/CHeader";
 import LCustomComponents from "@/components/templates/LCustomComponents";
-import { getLayout } from "@/features/LayoutData";
-import { IData, Page, PageContent } from "@/interfaces";
+import { Page, PageContent } from "@/interfaces";
 import { FC, useEffect, useState } from "react";
 
 export const getStaticProps = async () => {
@@ -15,14 +12,12 @@ export const getStaticProps = async () => {
     return docs[0];
   };
 
-  const [pageData, layoutData] = await Promise.all([
+  const [pageData] = await Promise.all([
     getPageData(),
-    getLayout(),
   ]);
 
   return {
     props: {
-      layoutData,
       pageData
     },
   };
@@ -30,11 +25,9 @@ export const getStaticProps = async () => {
 
 type IProps = {
   pageData: PageContent;
-  layoutData: [IData, IFooterData];
 };
 
 const CApp: FC<IProps> = ({
-  layoutData: [navData, footerData],
   pageData: { customComponents, slug, meta },
 }) => {
   const [startApp, setStartApp] = useState(false);
@@ -59,7 +52,6 @@ const CApp: FC<IProps> = ({
   return (
     <>
       {meta && <CHead meta={meta} slug={slug} />}
-      <CHeader data={navData} />
       <main>
         <div>
           {startApp && (
@@ -76,7 +68,6 @@ const CApp: FC<IProps> = ({
         </div>
         <LCustomComponents field={customComponents} />
       </main>
-      <CFooter data={footerData} />
     </>
   );
 };

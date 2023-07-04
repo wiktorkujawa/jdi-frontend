@@ -2,9 +2,6 @@ import { IData, Page, PageContent } from "@/interfaces";
 import React, { FC } from "react";
 import LContainer from "../components/templates/LContainer";
 import CHead from "@/components/organisms/CHead";
-import { getLayout } from "@/features/LayoutData";
-import CHeader from "@/components/organisms/CHeader";
-import CFooter, { IFooterData } from "@/components/organisms/CFooter";
 import LCustomComponents from "@/components/templates/LCustomComponents";
 
 interface IExperience {
@@ -33,7 +30,6 @@ type IProps = {
   experience: IExperience;
   education: IEducation;
   pageData: PageContent;
-  layoutData: [IData, IFooterData];
 };
 
 export const getStaticProps = async () => {
@@ -59,19 +55,17 @@ export const getStaticProps = async () => {
     return docs[0];
   };
 
-  const [experience, education, pageData, layoutData] = await Promise.all([
+  const [experience, education, pageData] = await Promise.all([
     getExperienceData(),
     getEducationData(),
-    getCustomData(),
-    getLayout(),
+    getCustomData()
   ]);
 
   return {
     props: {
       experience,
       education,
-      pageData,
-      layoutData,
+      pageData
     },
   };
 };
@@ -80,12 +74,10 @@ const Experience: FC<IProps> = ({
   experience,
   education,
   pageData: { customComponents, slug, meta },
-  layoutData: [navData, footerData],
 }) => {
   return (
     <>
       {meta && <CHead meta={meta} slug={slug} />}
-      <CHeader data={navData} />
       <main className="p-experience">
         <section className="my-16 o-container o-container--lg">
           <LContainer>
@@ -120,7 +112,6 @@ const Experience: FC<IProps> = ({
         </section>
         <LCustomComponents field={customComponents} />
       </main>
-      <CFooter data={footerData} />
     </>
   );
 };
