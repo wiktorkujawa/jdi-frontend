@@ -6,7 +6,6 @@ import useSWR from 'swr'
 
 // import AButton from "../atoms/AButton";
 // const Asvg = dynamic(() =>  import("../atoms/ASvg"));
-
 interface IAddress {
   street: string;
   city: string;
