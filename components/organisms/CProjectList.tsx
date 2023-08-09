@@ -1,5 +1,5 @@
 import { Project } from "@/interfaces";
-import React from "react";
+import React, { useMemo } from "react";
 import MProjectItem from "@/components/molecules/MProjectItem";
 import styles from "theme/components/organisms/CProjectList.module.css";
 import classNames from "classnames";
@@ -21,6 +21,9 @@ type Props = {
 };
 
 const CProjectList = ({ field: { projectsList, ...main } }: Props) => {
+  
+  const isMain = useMemo(() => Object.keys(main).length !== 0, [main]);
+
   return (
     <section
       className={classNames(
@@ -28,7 +31,7 @@ const CProjectList = ({ field: { projectsList, ...main } }: Props) => {
         "o-container o-container--lg my-16"
       )}
     >
-      {main && <MProjectItem key={main.id} field={main} main />}
+      {isMain && <MProjectItem key={main.id} field={main} main={isMain} />}
 
       <div id="list" className={styles["c-project-list--list-counter"]}>
         {projectsList?.map((field) => (

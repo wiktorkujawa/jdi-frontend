@@ -2,10 +2,11 @@ import CFooter, { IFooterData } from "@/components/organisms/CFooter";
 import CHeader from "@/components/organisms/CHeader";
 import { getLayout } from "@/features/LayoutData";
 import { IData, Page, PageContent } from "@/interfaces";
-import { FC, useEffect } from "react";
-import init from "@/public/assets/wasm/web/eframe_template";
+import { FC } from "react";
 import CHead from "@/components/organisms/CHead";
 import LCustomComponents from "@/components/templates/LCustomComponents";
+import CHeadingCopyBlock from "@/components/organisms/CHeadingCopyBlock";
+import CProjectList from "@/components/organisms/CProjectList";
 
 export const getStaticProps = async () => {
   const getPageData = async () => {
@@ -36,27 +37,45 @@ type IProps = {
 
 const Wasm: FC<IProps> = ({
   layoutData: [navData, footerData],
-  pageData: { customComponents, slug, meta },
+  pageData: { customComponents, slug, meta, subpages },
 }) => {
-  useEffect(() => {
-    // if (typeof document !== "undefined") {
-    init().catch((error) => {
-      if (!error.message.startsWith("Using exceptions for control flow,")) {
-        throw error;
-      }
-    });
-    // }
-  }, []);
-
   return (
     <>
       {meta && <CHead meta={meta} slug={slug} />}
       <CHeader data={navData} />
       <main>
         <div className="relative h-screen o-container o-container--lg my-16">
-          <canvas
-            className="absolute left-1/2 -translate-x-1/2 top-0 w-full max-w-wasm-app h-full"
-            id="the_canvas_id"
+          <CHeadingCopyBlock
+            field={{
+              level: "h1",
+              heading: "Web Assembly",
+              copy: [
+                {
+                  text: "Discover the power of Web Assembly (WASM) apps - revolutionizing web development with enhanced interactivity and performance.",
+                  type: "p",
+                  indent: 0,
+                },
+              ],
+            }}
+          />
+          <CProjectList
+            // @ts-ignore
+            field={{
+              projectsList:
+                subpages?.map((subpage) => {
+                  return {
+                    name: subpage.name,
+                    media: subpage.meta.image,
+                    button: {
+                      text: "Check it out",
+                      url: subpage.slug,
+                    },
+                    createdAt: subpage.createdAt,
+                    id: subpage.id,
+                    updatedAt: subpage.updatedAt,
+                  };
+                }) || [],
+            }}
           />
         </div>
         <div />

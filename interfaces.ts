@@ -42,6 +42,7 @@ export interface PageContent {
   id: string;
   name: string;
   slug: string;
+  subpages?: PageContent[];
   customComponents: any[];
   meta: MetaData;
   createdAt: string;
