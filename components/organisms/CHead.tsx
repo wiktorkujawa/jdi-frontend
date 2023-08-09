@@ -16,8 +16,9 @@ const CHead = ({ meta: { title, description, image }, slug }: Props) => {
       <meta
         name="og:url"
         property="og:url"
-        content={`https://just-dev-it.com${slug}`}
+        content={`https://just-dev-it.com/${slug}`}
       />
+      <link rel="canonical" href={`https://just-dev-it.com/${slug}`}/>
       <meta name="og:type" property="og:type" content="article" />
       <meta name="og:title" property="og:title" content={title} />
       <meta
