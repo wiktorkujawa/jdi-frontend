@@ -11,11 +11,12 @@ const CHead = ({ meta: { title, description, image }, slug }: Props) => {
   return (
     <Head>
       <title>{title}</title>
+      <meta name="author" content="Wiktor Kujawa"/>
       <meta name="description" content={description} />
       <meta
         name="og:url"
         property="og:url"
-        content={`https://just-dev-it.com${slug}}'`}
+        content={`https://just-dev-it.com${slug}`}
       />
       <meta name="og:type" property="og:type" content="article" />
       <meta name="og:title" property="og:title" content={title} />
@@ -25,7 +26,7 @@ const CHead = ({ meta: { title, description, image }, slug }: Props) => {
         content={description}
       />
       <meta name="og:image" property="og:image" content={image?.url} />
-      <meta name="og:site_name" property="og:site_name" content="OddsBeater" />
+      <meta name="og:site_name" property="og:site_name" content="Just-Dev-It" />
       <meta name="description" property="description" content={description} />
       <meta
         name="twitter:card"

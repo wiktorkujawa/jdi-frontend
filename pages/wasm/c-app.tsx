@@ -3,6 +3,7 @@ import CHead from "@/components/organisms/CHead";
 import CHeader from "@/components/organisms/CHeader";
 import LCustomComponents from "@/components/templates/LCustomComponents";
 import { getLayout } from "@/features/LayoutData";
+import useCanvasScroll from "@/hooks/useCanvasScroll";
 import { IData, Page, PageContent } from "@/interfaces";
 import { FC, useEffect, useState } from "react";
 
@@ -40,6 +41,9 @@ const CApp: FC<IProps> = ({
   const [startApp, setStartApp] = useState(false);
 
   useEffect(() => {
+    const handleScroll = (event: WheelEvent) => {
+      window.scrollBy(0, event.deltaY);
+    };
     const InitWasm = async () => {
       const Module = (await import("scriptjs")).default;
 
@@ -49,12 +53,23 @@ const CApp: FC<IProps> = ({
       Module.get("../assets/wasm/runIndex.js", () => {
         console.log("run index loaded");
       });
+        document
+          ?.getElementById('canvas')
+          ?.addEventListener("wheel", handleScroll);
+  
     };
     setTimeout(() => setStartApp(true), 1000);
     if (typeof document !== "undefined" && startApp) {
       InitWasm();
     }
+    () => {
+      document
+        ?.getElementById('canvas')
+        ?.removeEventListener("wheel", handleScroll);
+    };
   }, [startApp]);
+
+  useCanvasScroll('canvas');
 
   return (
     <>
