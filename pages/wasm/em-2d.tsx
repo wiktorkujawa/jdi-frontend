@@ -6,6 +6,7 @@ import { FC, useEffect } from "react";
 import init from "@/public/assets/wasm/web/eframe_template";
 import CHead from "@/components/organisms/CHead";
 import LCustomComponents from "@/components/templates/LCustomComponents";
+import useCanvasScroll from "@/hooks/useCanvasScroll";
 
 export const getStaticProps = async () => {
   const getPageData = async () => {
@@ -39,14 +40,15 @@ const EM2D: FC<IProps> = ({
   pageData: { customComponents, slug, meta },
 }) => {
   useEffect(() => {
-    // if (typeof document !== "undefined") {
     init().catch((error) => {
       if (!error.message.startsWith("Using exceptions for control flow,")) {
         throw error;
       }
     });
-    // }
+
   }, []);
+
+  useCanvasScroll();
 
   return (
     <>
