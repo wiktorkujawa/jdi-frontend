@@ -20,7 +20,7 @@ import styles from "theme/page.module.css";
 export const getStaticProps = async () => {
   const getPageData = async () => {
     const res = await fetch(
-      `${process.env.API_URL}pages?where[slug][equals]=/`
+      `${process.env.API_URL}pages?where[slug][equals]= `
     );
     const { docs }: Page = await res.json();
     return docs[0];
