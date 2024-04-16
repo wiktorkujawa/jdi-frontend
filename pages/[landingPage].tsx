@@ -8,15 +8,15 @@ import classNames from "classnames";
 import React, { FC } from "react";
 import styles from "theme/[landingPage]/page.module.css";
 
-const mainPages = ["/", "experience", "wasm"];
+const mainPages = ["/", "experience", "wasm", ""];
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.API_URL}pages`);
   const { docs } = await res.json();
 
-  const result = docs.filter((item: any) => !mainPages.includes(item.slug));
+  const result: PageContent[] = docs.filter((item: any) => !mainPages.includes(item.slug));
 
-  const paths = result.map((item: any) => ({
+  const paths = result.map((item) => ({
     params: {
       landingPage: item.slug,
     },
