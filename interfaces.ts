@@ -94,3 +94,10 @@ export interface ICopy {
   relationTo?: string;
   newTab?: boolean;
 }
+
+export type CustomComponentType = {
+  field: {
+    blockType: string;
+    [model: string]: any; 
+  }
+}
