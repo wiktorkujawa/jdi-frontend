@@ -3,12 +3,19 @@ import React, { FC } from "react";
 
 import loadable from '@loadable/component'
 
-const DynamicComponent = loadable((props: any) => import(`./C${props.field.blockType}`));
+type Props = {
+  field: {
+    blockType: string;
+    [model: string]: any; 
+  }
+}
+
+const DynamicComponent = loadable((props: Props) => import(`./C${props.field.blockType}`));
 
 // const DynamicComponent = (componentName: string) =>
 //   dynamic(() => import(`./C${componentName}`));
 
-const CCustomComponent: FC<{ field: any }> = ({ field }) => {
+const CCustomComponent: FC<Props> = ({ field }) => {
   // return React.createElement(DynamicComponent(field?.blockType), {
   //   // @ts-ignore
   //   field: field,
