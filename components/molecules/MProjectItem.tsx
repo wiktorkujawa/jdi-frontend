@@ -77,7 +77,7 @@ const MProjectItem = ({
       {
         buttons?.map(({button}) => {
           return (
-            <AButton className="w-full flex justify-center lg:w-auto" href={button.url} target="_blank">
+            <AButton key={button.url} className="w-full flex justify-center lg:w-auto" href={button.url} target="_blank">
               {button.text}
             </AButton>
           );
