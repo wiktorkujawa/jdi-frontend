@@ -7,6 +7,7 @@ import LCustomComponents from "@/components/templates/LCustomComponents";
 import { getLayout } from "@/features/LayoutData";
 import {
   Button,
+  GroupElement,
   ICopy,
   IData,
   Page,
@@ -70,6 +71,7 @@ type IProps = {
     createdAt: string;
     updatedAt: string;
     button: Button;
+    buttons: GroupElement<Button, "button">[];
     media: Upload;
   };
   layoutData: [IData, IFooterData];

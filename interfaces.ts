@@ -33,7 +33,7 @@ export interface Project {
   description?: string;
   createdAt: string;
   updatedAt: string;
-  buttons: GroupElement<Button, "button">[];
+  buttons?: GroupElement<Button, "button">[];
   button: Button;
   media: Upload;
 }
