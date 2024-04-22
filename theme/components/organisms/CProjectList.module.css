@@ -7,4 +7,5 @@
   counter-reset: counter;
   display: flex;
   flex-wrap: wrap;
+  row-gap: 32px;
 }

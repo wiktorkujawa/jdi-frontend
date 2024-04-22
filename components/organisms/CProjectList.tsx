@@ -1,4 +1,4 @@
-import { Project } from "@/interfaces";
+import { GroupElement, Project } from "@/interfaces";
 import React, { useMemo } from "react";
 import MProjectItem from "@/components/molecules/MProjectItem";
 import styles from "theme/components/organisms/CProjectList.module.css";
@@ -15,6 +15,7 @@ type Props = {
     description?: string;
     createdAt: string;
     updatedAt: string;
+    buttons: GroupElement<Button, "button">[];
     button: Button;
     media: Upload;
   };
