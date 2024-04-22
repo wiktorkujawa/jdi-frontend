@@ -20,6 +20,7 @@ const MProjectItem = ({
     },
     description,
     name,
+    buttons,
     button,
     mediaUrl,
   },
@@ -33,13 +34,13 @@ const MProjectItem = ({
       )}
     >
       <figure>
-        <Link target="_blank" href={mediaUrl || button.url}>
+        <Link target="_blank" href={mediaUrl || "#"}>
           {!main && (
             <>
               <h3 className={classNames(styles["m-project-item--header"])}>
                 Project{" "}
               </h3>
-              <h3 className="text-h3 font-bold">{name}</h3>
+              <h3 className="text-h3 font-bold mb-4">{name}</h3>
             </>
           )}
 
@@ -69,11 +70,24 @@ const MProjectItem = ({
         </Link>
       </figure>
 
+<div className="flex flex-col justify-between">
       {!main && <p className="mt-4">{description}</p>}
 
-      <AButton href={button.url} target="_blank">
+      <div className="flex flex-wrap justify-between">
+      {
+        buttons?.map(({button}) => {
+          return (
+            <AButton className="w-full flex justify-center lg:w-auto" href={button.url} target="_blank">
+              {button.text}
+            </AButton>
+          );
+        })
+      }
+      </div>
+     { main && <AButton href={button.url} target="_blank">
         {button.text}
-      </AButton>
+      </AButton>}
+      </div>
     </article>
   );
 };
