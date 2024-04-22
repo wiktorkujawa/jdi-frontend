@@ -17,6 +17,11 @@ export interface Button {
   target?: "_blank" | "_self";
 }
 
+export type GroupElement<T, label extends string> = {
+  id: string;
+} & { [K in label]: T };
+
+
 export interface Page extends ApiResponse {
   docs: PageContent[];
 }
@@ -28,6 +33,7 @@ export interface Project {
   description?: string;
   createdAt: string;
   updatedAt: string;
+  buttons: GroupElement<Button, "button">[];
   button: Button;
   media: Upload;
 }
