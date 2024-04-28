@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import CCustomComponent from "../organisms/CCustomComponent";
+import CCustomComponent from "@/components/organisms/CCustomComponent";
 
 const LCustomComponents: FC<{ field: any }> = ({ field }) => {
   return (

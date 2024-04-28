@@ -1,48 +1,29 @@
-import CFooter, { IFooterData } from "@/components/organisms/CFooter";
-import CHeader from "@/components/organisms/CHeader";
-import { getLayout } from "@/features/LayoutData";
-import { IData, Page, PageContent } from "@/interfaces";
-import { FC } from "react";
-import CHead from "@/components/organisms/CHead";
+import { Page } from "@/interfaces";
 import LCustomComponents from "@/components/templates/LCustomComponents";
 import CHeadingCopyBlock from "@/components/organisms/CHeadingCopyBlock";
 import CProjectList from "@/components/organisms/CProjectList";
 
-export const getStaticProps = async () => {
-  const getPageData = async () => {
-    const res = await fetch(
-      `${process.env.API_URL}pages?where[slug][equals]=wasm`
-    );
-    const { docs }: Page = await res.json();
-    return docs[0];
-  };
+const getPageData = async () => {
+  const res = await fetch(
+    `${process.env.API_URL}pages?where[slug][equals]=wasm`
+  );
+  const { docs }: Page = await res.json();
+  return docs[0];
+};
 
-  const [pageData, layoutData] = await Promise.all([
-    getPageData(),
-    getLayout(),
-  ]);
-
+export const generateMetadata = async () => {
+  const { meta, slug } = await getPageData();
   return {
-    props: {
-      layoutData,
-      pageData,
-    },
+    title: meta.title,
+    description: meta.description,
   };
 };
 
-type IProps = {
-  pageData: PageContent;
-  layoutData: [IData, IFooterData];
-};
 
-const Wasm: FC<IProps> = ({
-  layoutData: [navData, footerData],
-  pageData: { customComponents, slug, meta, subpages },
-}) => {
+const Wasm = async () => {
+  const { customComponents, subpages } = await getPageData();
   return (
     <>
-      {meta && <CHead meta={meta} slug={slug} />}
-      <CHeader data={navData} />
       <main>
         <div className="relative h-screen o-container o-container--lg my-16">
           <CHeadingCopyBlock
@@ -81,7 +62,6 @@ const Wasm: FC<IProps> = ({
         <div />
         <LCustomComponents field={customComponents} />
       </main>
-      <CFooter data={footerData} />
     </>
   );
 };

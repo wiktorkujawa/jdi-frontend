@@ -1,10 +1,12 @@
+'use client';
 import classNames from "classnames";
 import Link from "next/link";
 import React, { FC, useEffect, useMemo, useState } from "react";
 import styles from "@/theme/components/molecules/MNavigation.module.css";
 import SunIcon from "@/public/assets/svg/sun.svg";
 import MoonIcon from "@/public/assets/svg/moon.svg";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+import { usePathname, useSearchParams } from 'next/navigation'
 
 interface Props {
   nav: INav[];
@@ -19,17 +21,20 @@ interface INav {
 const relativeLink = (link: string) => link[0] == "/" ? link : `/${link}`;
 
 const MNavigation: FC<Props> = ({ nav }) => {
-  const router = useRouter();
+  // const router = useRouter();
+  const pathname = usePathname();
   const [openNav, setOpenNav] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
 
-  const pathname = useMemo(() => {
-    const hashIndex = router.asPath.indexOf("#");
-    if(hashIndex!=-1) {
-      return router.asPath.substring(0, hashIndex)
-    }
-    return router.asPath
-  },[router.asPath]);
+  // const pathname = useMemo(() => {
+  //   const hashIndex = router.asPath.indexOf("#");
+  //   if(hashIndex!=-1) {
+  //     return router.asPath.substring(0, hashIndex)
+  //   }
+  //   return router.asPath
+  // },[router.asPath]);
+
+  console.log(pathname);
 
   useEffect(() => {
     if (localStorage?.getItem("jdi-dark-mode")) {

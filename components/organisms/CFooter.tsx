@@ -39,11 +39,18 @@ type IProps = {
 
 // const getFooterData = (url: string) => fetch(url).then((res) => res.json());
 
-const CFooter = ({ data }: IProps) => {
-  // const { data, error, isLoading } = useSWR<IFooterData>('/api/globals/footer', getFooterData);
+const getFooterData = async () => {
+  const res = await fetch(`${process.env.API_URL}globals/footer`, {
+    next: {
+      tags: ["footer"],
+    },
+  });
+  const data: IFooterData = await res.json();
+  return data;
+};
 
-  // if (error) return <div>failed to load</div>
-  // if (isLoading) return <div>loading...</div>
+const CFooter = async () => {
+  const data = await getFooterData();
 
   return (
     <footer className="c-footer dark:bg-dark-bg-window bg-theme-bg-window dark:text-dark-font-primary text-theme-font-primary">

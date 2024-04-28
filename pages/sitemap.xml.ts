@@ -5,8 +5,14 @@ const relativeLink = (link: string) => (link[0] == "/" ? link : `/${link}`);
 const getPages = async () => {
   const res = await fetch(`${process.env.API_URL}pages`);
   const { docs }: Page = await res.json();
+  console.log(docs);
 
-  return docs.map(({ slug }) => process.env.APP_URL + relativeLink(slug));
+  return docs.map(({ slug, updatedAt }) => ({
+    url: process.env.APP_URL + relativeLink(slug),
+    lastmod: updatedAt,
+    changefreq: "monthly",
+    priority: 1.0,
+  }));
 };
 
 const SiteMap = () => {
@@ -19,11 +25,11 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   ${allPaths
-    .map((url: string) => {
+    .map((path) => {
       return `
       <url>
-        <loc>${url}</loc>
-        <lastmod>${new Date().toISOString()}</lastmod>
+        <loc>${path.url}</loc>
+        <lastmod>${path.lastmod}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
       </url>
