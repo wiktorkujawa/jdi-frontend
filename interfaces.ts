@@ -38,7 +38,7 @@ export interface Project {
   media: Upload;
 }
 
-export interface MetaData {
+export interface IMetaData {
   title: string;
   description: string;
   image: Upload;
@@ -50,7 +50,7 @@ export interface PageContent {
   slug: string;
   subpages?: PageContent[];
   customComponents: any[];
-  meta: MetaData;
+  meta: IMetaData;
   createdAt: string;
   updatedAt: string;
 }

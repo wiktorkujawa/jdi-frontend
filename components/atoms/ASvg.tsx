@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import dynamic from 'next/dynamic'
 
 interface IconsClasses {
@@ -12,7 +12,7 @@ const iconsClasses: IconsClasses = {
 
 const DynamicComponent = (name: string) => dynamic(() => import(`/public/assets/svg/${name}.svg`));
 
-const Asvg:FC<any> = ({ name, className, ...props}) => {
+const Asvg: FC<any> = ({ name, className, ...props}) => {
   let Icon = DynamicComponent(name)
   return (
     <Icon {...props} className={`${iconsClasses[name]} ${className}`}/>

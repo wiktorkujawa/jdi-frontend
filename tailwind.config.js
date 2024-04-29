@@ -2,9 +2,8 @@
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/organisms/*.{js,ts,jsx,tsx}",
-    "./components/molecules/*.{js,ts,jsx,tsx}",
+    "./components/organisms/**/*.{js,ts,jsx,tsx}",
+    "./components/molecules/**/*.{js,ts,jsx,tsx}",
     "./components/atoms/*.{js,ts,jsx,tsx}",
     "./components/templates/*.{js,ts,jsx,tsx}",
     "./features/*.{js,ts,jsx,tsx}",
