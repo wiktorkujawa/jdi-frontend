@@ -1,7 +1,7 @@
 import { GroupElement, Project } from "@/interfaces";
 import MProjectItem from "@/components/molecules/MProjectItem";
 import styles from "./CProjectList.module.css";
-import classNames from "classnames";
+import clsx from "clsx";
 import { Button, Upload } from "@/interfaces";
 
 type Props = {
@@ -25,7 +25,7 @@ const CProjectList = ({ field: { projectsList, ...main } }: Props) => {
 
   return (
     <section
-      className={classNames(
+      className={clsx(
         styles["c-project-list"],
         "o-container o-container--lg my-16"
       )}

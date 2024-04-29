@@ -2,7 +2,7 @@ import { Project } from "@/interfaces";
 import Link from "next/link";
 import AButton from "@/components/atoms/AButton";
 import styles from "./MProjectItem.module.css";
-import classNames from "classnames";
+import clsx from "clsx";
 import Image from "next/image";
 
 type Props = {
@@ -27,7 +27,7 @@ const MProjectItem = ({
 }: Props) => {
   return (
     <article
-      className={classNames(
+      className={clsx(
         styles["m-project-item"],
         `text-center ${main ? "" : "lg:w-1/2"} px-2 w-full`
       )}
@@ -36,7 +36,7 @@ const MProjectItem = ({
         <Link target="_blank" href={mediaUrl || "#"}>
           {!main && (
             <>
-              <h3 className={classNames(styles["m-project-item--header"])}>
+              <h3 className={clsx(styles["m-project-item--header"])}>
                 Project{" "}
               </h3>
               <h3 className="text-h3 font-bold mb-4">{name}</h3>

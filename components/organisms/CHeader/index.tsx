@@ -2,7 +2,7 @@ import styles from "./CHeader.module.css";
 import Link from "next/link";
 import Logo from "@/public/logo.svg";
 import MNavigation from "@/components/molecules/MNavigation";
-import classNames from "classnames";
+import clsx from "clsx";
 import { IData } from "@/interfaces";
 
 const getHeaderData = async () => {
@@ -21,14 +21,14 @@ const CHeader = async () => {
 
   return (
     <header
-      className={classNames(
+      className={clsx(
         styles.wrapperComponent,
         "dark:bg-dark-bg-window bg-theme-bg-window dark:text-dark-font-primary text-theme-font-primary"
       )}
     >
       <div className={styles.content}>
         <Link href={"/"}>
-          <Logo className={classNames(styles.logo, "dark:fill-white")} />
+          <Logo className={clsx(styles.logo, "dark:fill-white")} />
         </Link>
         <MNavigation nav={[...page, ...pages]} />
       </div>

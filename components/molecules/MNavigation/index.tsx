@@ -1,5 +1,5 @@
 'use client';
-import classNames from "classnames";
+import clsx from "clsx";
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 import styles from "./MNavigation.module.css";
@@ -41,7 +41,7 @@ const MNavigation: FC<Props> = ({ nav }) => {
     <>
       <button
         aria-label="Toggle Menu"
-        className={classNames(
+        className={clsx(
           styles.button,
           { [styles.openButton]: openNav },
           "dark:border-dark-font-primary border-theme-font-primary"
@@ -49,14 +49,14 @@ const MNavigation: FC<Props> = ({ nav }) => {
         onClick={() => setOpenNav((prev) => !prev)}
       >
         <div
-          className={classNames(
+          className={clsx(
             styles.icon,
             "dark:bg-dark-font-primary bg-theme-font-primary"
           )}
         />
       </button>
       <nav
-        className={classNames(
+        className={clsx(
           styles.nav,
           { [styles.openNav]: openNav },
           "dark:bg-dark-bg-window bg-theme-bg-window"
@@ -69,7 +69,7 @@ const MNavigation: FC<Props> = ({ nav }) => {
           >
             <Link
               onClick={() => setOpenNav(false)}
-              className={classNames(styles.link, pathname == relativeLink(page.slug) ? "text-pink-500" : "")}
+              className={clsx(styles.link, pathname == relativeLink(page.slug) ? "text-pink-500" : "")}
               href={relativeLink(page.slug)}
             >
               {page.name}
@@ -82,7 +82,7 @@ const MNavigation: FC<Props> = ({ nav }) => {
                     <Link
                       key={subpage.id}
                       onClick={() => setOpenNav(false)}
-                      className={classNames(styles.sublink, pathname == relativeLink(subpage.slug) ? "text-pink-500" : "")}
+                      className={clsx(styles.sublink, pathname == relativeLink(subpage.slug) ? "text-pink-500" : "")}
                       href={relativeLink(subpage.slug)}
                     >
                       {subpage.name}
