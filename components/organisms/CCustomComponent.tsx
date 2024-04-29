@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+'use client';
+import { FC } from "react";
 // import dynamic from "next/dynamic";
 
 import loadable from '@loadable/component'

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import Asvg from './ASvg';
 import Link from 'next/link'
 
