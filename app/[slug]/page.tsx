@@ -2,6 +2,8 @@ import LCustomComponents from "@/components/templates/LCustomComponents";
 import { Page, PageContent } from "@/interfaces";
 import React, { FC } from "react";
 import { Metadata } from "next";
+import { generateMeta } from "@/features/metadata";
+import { notFound } from "next/navigation";
 
 const mainPages = ["/", "experience", "wasm", ""];
 
@@ -17,11 +19,10 @@ export async function generateStaticParams() {
 }
 
 export const generateMetadata = async ({ params }: Params): Promise<Metadata> => {
-  const {meta, slug } = await getPageData(params.slug);
-  return {
-    title: meta.title,
-    description: meta.description,
-  };
+    const pageData = await getPageData(params.slug);
+    if (!pageData) return notFound();
+    const { meta, slug } = pageData;
+    return generateMeta(meta, slug);
 };
 
 
@@ -29,6 +30,7 @@ const getPageData = async (slug: string) => {
   const res = await fetch(
     `${process.env.API_URL}pages?where[slug][equals]=${slug}`
   );
+  if (!res.ok) return undefined;
   const { docs }: Page = await res.json();
   return docs[0];
 };
@@ -44,8 +46,9 @@ const LandingPage: FC<Params> = async ({
     slug
   }
 }) => {
-  const { customComponents } = await getPageData(slug);
-  return <LCustomComponents field={customComponents} />;
+  const data = await getPageData(slug);
+  if(!data) return notFound();
+  return <LCustomComponents field={data.customComponents} />;
 };
 
 export default LandingPage;

@@ -1,10 +1,8 @@
 import { GroupElement, Project } from "@/interfaces";
-import React from "react";
 import MProjectItem from "@/components/molecules/MProjectItem";
-import styles from "theme/components/organisms/CProjectList.module.css";
+import styles from "./CProjectList.module.css";
 import classNames from "classnames";
-import { Button } from "@/interfaces";
-import { Upload } from "@/interfaces";
+import { Button, Upload } from "@/interfaces";
 
 type Props = {
   field: {

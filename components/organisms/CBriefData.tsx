@@ -1,6 +1,5 @@
 import { ICopy } from '@/interfaces';
-import React from 'react'
-import CHeadingCopyBlock from './CHeadingCopyBlock';
+import CHeadingCopyBlock from '@/components/organisms/CHeadingCopyBlock';
 
 type Props = {
   arrowScroll?: string;

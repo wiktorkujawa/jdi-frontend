@@ -1,7 +1,6 @@
 // import dynamic from "next/dynamic";
 // import Image from "next/image";
-import React from "react";
-import Asvg from "../atoms/ASvg";
+import Asvg from "@/components/atoms/ASvg";
 // import useSWR from 'swr'
 
 // import AButton from "../atoms/AButton";
@@ -32,12 +31,6 @@ export interface IFooterData {
   emails: IEmail[];
   socials?: ISocial[];
 }
-
-type IProps = {
-  data: IFooterData;
-};
-
-// const getFooterData = (url: string) => fetch(url).then((res) => res.json());
 
 const getFooterData = async () => {
   const res = await fetch(`${process.env.API_URL}globals/footer`, {

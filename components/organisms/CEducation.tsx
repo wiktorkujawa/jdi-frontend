@@ -1,5 +1,4 @@
-import React from 'react'
-import LContainer from '../templates/LContainer'
+import LContainer from '@/components/templates/LContainer'
 
 interface IEducation {
   header: string;

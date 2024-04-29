@@ -2,6 +2,7 @@ import { Page } from "@/interfaces";
 import LCustomComponents from "@/components/templates/LCustomComponents";
 import CHeadingCopyBlock from "@/components/organisms/CHeadingCopyBlock";
 import CProjectList from "@/components/organisms/CProjectList";
+import { generateMeta } from "@/features/metadata";
 
 const getPageData = async () => {
   const res = await fetch(
@@ -13,10 +14,7 @@ const getPageData = async () => {
 
 export const generateMetadata = async () => {
   const { meta, slug } = await getPageData();
-  return {
-    title: meta.title,
-    description: meta.description,
-  };
+  return generateMeta(meta, slug);
 };
 
 
@@ -24,7 +22,6 @@ const Wasm = async () => {
   const { customComponents, subpages } = await getPageData();
   return (
     <>
-      <main>
         <div className="relative h-screen o-container o-container--lg my-16">
           <CHeadingCopyBlock
             field={{
@@ -61,7 +58,6 @@ const Wasm = async () => {
         </div>
         <div />
         <LCustomComponents field={customComponents} />
-      </main>
     </>
   );
 };

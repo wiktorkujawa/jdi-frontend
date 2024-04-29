@@ -1,12 +1,12 @@
 import CAllProjects from "@/components/organisms/CAllProjects";
 import CBriefData from "@/components/organisms/CBriefData";
 import LCustomComponents from "@/components/templates/LCustomComponents";
+import { generateMeta } from "@/features/metadata";
 import {
   Page,
 } from "@/interfaces";
 import { Metadata } from "next";
 import React from "react";
-import styles from "theme/page.module.css";
 
 const getPageData = async () => {
   const res = await fetch(
@@ -17,11 +17,8 @@ const getPageData = async () => {
 };
 
 export const generateMetadata  = async (): Promise<Metadata> => {
-  const { meta } = await getPageData();
-  return {
-    title: meta.title,
-    description: meta.description,
-  };
+  const { meta, slug } = await getPageData();
+  return generateMeta(meta, slug);
 };
 
 const Home = async () => {
@@ -29,11 +26,9 @@ const Home = async () => {
 
   return (
     <>
-      <main className={styles.main}>
         <CBriefData arrowScroll="list" />
         <CAllProjects />
         <LCustomComponents field={customComponents} />
-      </main>
     </>
   );
 };

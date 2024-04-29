@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
             <body className={`${figtree.className}`}>
                 <CHeader />
-                <main className={styles.main}>
+                <main className="min-h-screen">
                     {children}
                 </main>
                 <CFooter />

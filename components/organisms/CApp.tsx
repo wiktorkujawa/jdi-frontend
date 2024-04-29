@@ -1,37 +1,8 @@
-import CHead from "@/components/organisms/CHead";
-import CHeader from "@/components/organisms/CHeader";
-import LCustomComponents from "@/components/templates/LCustomComponents";
-import useCanvasScroll from "@/hooks/useCanvasScroll";
-import { IData, Page, PageContent } from "@/interfaces";
-import { FC, useEffect, useState } from "react";
+'use client';
+import useCanvasScroll from '@/hooks/useCanvasScroll';
+import { useEffect, useState } from 'react'
 
-export const getStaticProps = async () => {
-  const getPageData = async () => {
-    const res = await fetch(
-      `${process.env.API_URL}pages?where[slug][equals]=wasm%2Fc-app`
-    );
-    const { docs }: Page = await res.json();
-    return docs[0];
-  };
-
-  const [pageData] = await Promise.all([
-    getPageData(),
-  ]);
-
-  return {
-    props: {
-      pageData
-    },
-  };
-};
-
-type IProps = {
-  pageData: PageContent;
-};
-
-const CApp: FC<IProps> = ({
-  pageData: { customComponents, slug, meta },
-}) => {
+const CApp = () => {
   const [startApp, setStartApp] = useState(false);
 
   useEffect(() => {
@@ -64,12 +35,8 @@ const CApp: FC<IProps> = ({
   }, [startApp]);
 
   useCanvasScroll('canvas');
-
   return (
-    <>
-      {meta && <CHead meta={meta} slug={slug} />}
-      <main>
-        <div>
+    <div>
           {startApp && (
             <div className="mx-4 overflow-x-auto">
               <canvas
@@ -82,10 +49,7 @@ const CApp: FC<IProps> = ({
             </div>
           )}
         </div>
-        <LCustomComponents field={customComponents} />
-      </main>
-    </>
-  );
-};
+  )
+}
 
 export default CApp;

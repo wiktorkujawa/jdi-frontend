@@ -1,6 +1,6 @@
 import { ICopy } from "@/interfaces";
 import dynamic from "next/dynamic";
-import React, { FC } from "react";
+import { FC } from "react";
 
 const ORichText = dynamic(() => import('@/features/ORichText'));
 const LContainer = dynamic(() => import('@/components/templates/LContainer'));

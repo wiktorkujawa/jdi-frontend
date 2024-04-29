@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import LCustomComponents from "@/components/templates/LCustomComponents";
 import CEducation from "@/components/organisms/CEducation";
 import CExperience from "@/components/organisms/CExperience";
+import { generateMeta } from "@/features/metadata";
 
 
   const getCustomData = async () => {
@@ -17,10 +18,7 @@ import CExperience from "@/components/organisms/CExperience";
 
  export const generateMetadata = async () => {
   const { meta, slug } = await getCustomData();
-  return {
-    title: meta.title,
-    description: meta.description,
-  };
+  return generateMeta(meta, slug);
 };
 
 const Experience = async () => {

@@ -1,8 +1,8 @@
 import { Project } from "@/interfaces";
 import Link from "next/link";
 import React from "react";
-import AButton from "../atoms/AButton";
-import styles from "theme/components/molecules/MProjectItem.module.css";
+import AButton from "@/components/atoms/AButton";
+import styles from "./MProjectItem.module.css";
 import classNames from "classnames";
 import Image from "next/image";
 

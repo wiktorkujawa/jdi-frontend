@@ -1,8 +1,7 @@
-import React from "react";
-import styles from "theme/components/organisms/CHeader.module.css";
+import styles from "./CHeader.module.css";
 import Link from "next/link";
-import Logo from "public/logo.svg";
-import MNavigation from "../molecules/MNavigation";
+import Logo from "@/public/logo.svg";
+import MNavigation from "@/components/molecules/MNavigation";
 import classNames from "classnames";
 import { IData } from "@/interfaces";
 
