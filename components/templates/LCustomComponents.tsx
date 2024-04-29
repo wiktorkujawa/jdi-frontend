@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import CCustomComponent from "@/components/organisms/CCustomComponent";
 
 const LCustomComponents: FC<{ field: any }> = ({ field }) => {

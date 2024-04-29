@@ -6,7 +6,6 @@ import {
   Page,
 } from "@/interfaces";
 import { Metadata } from "next";
-import React from "react";
 
 const getPageData = async () => {
   const res = await fetch(

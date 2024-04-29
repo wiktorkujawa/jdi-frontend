@@ -1,7 +1,7 @@
 'use client';
 import classNames from "classnames";
 import Link from "next/link";
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import styles from "./MNavigation.module.css";
 import SunIcon from "@/public/assets/svg/sun.svg";
 import MoonIcon from "@/public/assets/svg/moon.svg";

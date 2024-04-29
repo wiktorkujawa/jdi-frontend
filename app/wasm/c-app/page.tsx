@@ -16,7 +16,7 @@ export const generateMetadata = async () => {
   return generateMeta(meta, slug);
 };
 
-const Page = async () => {
+const CPage = async () => {
   const { customComponents } = await getPageData();
 
   return (
@@ -27,4 +27,4 @@ const Page = async () => {
   );
 };
 
-export default Page;
+export default CPage;

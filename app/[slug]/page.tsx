@@ -1,6 +1,5 @@
 import LCustomComponents from "@/components/templates/LCustomComponents";
 import { Page, PageContent } from "@/interfaces";
-import React, { FC } from "react";
 import { Metadata } from "next";
 import { generateMeta } from "@/features/metadata";
 import { notFound } from "next/navigation";
@@ -41,11 +40,11 @@ type Params = {
   }
 };
 
-const LandingPage: FC<Params> = async ({
+const LandingPage = async ({
   params: {
     slug
   }
-}) => {
+}: Params) => {
   const data = await getPageData(slug);
   if(!data) return notFound();
   return <LCustomComponents field={data.customComponents} />;

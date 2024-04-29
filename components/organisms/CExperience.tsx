@@ -42,4 +42,4 @@ const CExperience = async () => {
   )
 }
 
-export default CExperience
+export default CExperience;
