@@ -22,7 +22,7 @@ type BriefDataProps = {
   blockName?: string;
 };
 
-const CBriefData = async ({arrowScroll}: Props) => {
+const CBriefData = async ({ arrowScroll }: Props) => {
   const briefData = await getBriefData();
   return (
     <CHeadingCopyBlock field={{ ...briefData, arrowScroll }} />
