@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@loadable/component": "^5.16.3",
     "@types/node": "18.19.31",
     "@types/react": "^18.2.79",
     "@types/react-dom": "^18.2.25",
@@ -26,7 +25,6 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^7.0.0",
-    "@types/loadable__component": "^5.13.9",
     "@types/scriptjs": "^0.0.2",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",

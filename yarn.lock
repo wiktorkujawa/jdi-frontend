@@ -1424,7 +1424,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.7.7, @babel/runtime@npm:^7.8.4":
+"@babel/runtime@npm:^7.23.2, @babel/runtime@npm:^7.8.4":
   version: 7.24.4
   resolution: "@babel/runtime@npm:7.24.4"
   dependencies:
@@ -1966,19 +1966,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@loadable/component@npm:^5.16.3":
-  version: 5.16.3
-  resolution: "@loadable/component@npm:5.16.3"
-  dependencies:
-    "@babel/runtime": "npm:^7.7.7"
-    hoist-non-react-statics: "npm:^3.3.1"
-    react-is: "npm:^16.12.0"
-  peerDependencies:
-    react: ^16.3.0 || ^17.0.0 || ^18.0.0
-  checksum: 10c0/5f82b5fa8e7befa5baacfb85bb3070f811c96084be9d1303a88a172e9d776be154c03eb9f33db1d72e34c1ca543e57f8be9c5a5e9501f388dda934e8082db393
-  languageName: node
-  linkType: hard
-
 "@next/env@npm:14.2.1":
   version: 14.2.1
   resolution: "@next/env@npm:14.2.1"
@@ -2302,15 +2289,6 @@ __metadata:
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
   checksum: 10c0/6bf5337bc447b706bb5b4431d37686aa2ea6d07cfd6f79cc31de80170d6ff9b1c7384a9c0ccbc45b3f512bae9e9f75c2e12109806a15331dc94e8a8db6dbb4ac
-  languageName: node
-  linkType: hard
-
-"@types/loadable__component@npm:^5.13.9":
-  version: 5.13.9
-  resolution: "@types/loadable__component@npm:5.13.9"
-  dependencies:
-    "@types/react": "npm:*"
-  checksum: 10c0/22d40c1a207b355cd00dae06621ad2f92dabe583830a08ed17004c50ecae69401fa6a6367a29a6611004bcb49c29a731365b62090254ada835f61dbad81669d0
   languageName: node
   linkType: hard
 
@@ -4424,15 +4402,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hoist-non-react-statics@npm:^3.3.1":
-  version: 3.3.2
-  resolution: "hoist-non-react-statics@npm:3.3.2"
-  dependencies:
-    react-is: "npm:^16.7.0"
-  checksum: 10c0/fe0889169e845d738b59b64badf5e55fa3cf20454f9203d1eb088df322d49d4318df774828e789898dcb280e8a5521bb59b3203385662ca5e9218a6ca5820e74
-  languageName: node
-  linkType: hard
-
 "http-cache-semantics@npm:^4.1.1":
   version: 4.1.1
   resolution: "http-cache-semantics@npm:4.1.1"
@@ -4869,9 +4838,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "jdi-frontend@workspace:."
   dependencies:
-    "@loadable/component": "npm:^5.16.3"
     "@svgr/webpack": "npm:^7.0.0"
-    "@types/loadable__component": "npm:^5.13.9"
     "@types/node": "npm:18.19.31"
     "@types/react": "npm:^18.2.79"
     "@types/react-dom": "npm:^18.2.25"
@@ -6315,7 +6282,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^16.12.0, react-is@npm:^16.13.1, react-is@npm:^16.7.0":
+"react-is@npm:^16.13.1":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: 10c0/33977da7a5f1a287936a0c85639fec6ca74f4f15ef1e59a6bc20338fc73dc69555381e211f7a3529b8150a1f71e4225525b41b60b52965bda53ce7d47377ada1

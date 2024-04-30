@@ -20,7 +20,7 @@ type Props = {
 };
 
 const CProjectList = ({ field: { projectsList, ...main } }: Props) => {
-  
+
   const isMain = Object.keys(main).length !== 0;
 
   return (
