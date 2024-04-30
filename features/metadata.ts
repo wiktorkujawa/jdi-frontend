@@ -9,13 +9,13 @@ export const generateMeta = (meta: IMetaData, slug: string): Metadata => {
       url: "https://just-dev-it.com",
     },
     alternates: {
-      canonical: slug,
+      canonical: '/'+slug,
     },
     description: meta.description,
     openGraph: {
       title: meta?.title,
       description: meta?.description,
-      url: slug,
+      url: '/'+slug,
       creators: "@just-dev-it",
       siteName: "JUST-DEV-IT",
       images: [{ url: meta?.image?.url, width: 1200, height: 630 }],
