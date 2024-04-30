@@ -6,18 +6,18 @@ export const generateMeta = (meta: IMetaData, slug: string): Metadata => {
     title: meta.title,
     authors: {
       name: "Wiktor Kujawa",
-      url: process.env.APP_URL,
+      url: "https://just-dev-it.com",
     },
     alternates: {
-      canonical: `${process.env.APP_URL}/${slug}`,
+      canonical: `https://just-dev-it.com/${slug}`,
     },
     description: meta.description,
     openGraph: {
       title: meta?.title,
       description: meta?.description,
-      url: `${process.env.APP_URL}/${slug}`,
+      url: `https://just-dev-it.com/${slug}`,
       creators: "@just-dev-it",
-      siteName: process.env.APP_URL,
+      siteName: "JUST-DEV-IT",
       images: [{ url: meta?.image?.url, width: 1200, height: 630 }],
     },
     twitter: {

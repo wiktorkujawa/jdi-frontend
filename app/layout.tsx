@@ -3,7 +3,6 @@ import '@/theme/css/globals.css'
 import CHeader from '@/components/organisms/CHeader';
 import CFooter from '@/components/organisms/CFooter';
 import Script from 'next/script';
-import styles from "theme/page.module.css";
 import { Metadata } from 'next';
 
 const figtree = Figtree({ subsets: ['latin']});
@@ -24,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 
 export const metadata: Metadata = {
-    manifest: '/site.webmanifest',
+    manifest: 'https://just-dev-it.com/manifest.json',
     icons: {
       icon: '/favicon-32x32.png',
       shortcut: '/favicon-32x32.png',
