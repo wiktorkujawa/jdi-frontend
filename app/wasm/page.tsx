@@ -44,6 +44,7 @@ const Wasm = async () => {
                   return {
                     name: subpage.name,
                     media: subpage.meta.image,
+                    mediaUrl: subpage.slug,
                     button: {
                       text: "Check it out",
                       url: subpage.slug,
