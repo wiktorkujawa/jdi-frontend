@@ -23,7 +23,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 
 export const metadata: Metadata = {
-    manifest: 'https://just-dev-it.com/manifest.json',
+    manifest: 'https://just-dev-it.com/manifest.webmanifest',
+    themeColor: { media: "(prefers-color-scheme: dark)", color: "#030303" },
     icons: {
       icon: '/favicon-32x32.png',
       shortcut: '/favicon-32x32.png',
