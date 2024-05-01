@@ -23,6 +23,8 @@ const CProjectList = ({ field: { projectsList, ...main } }: Props) => {
 
   const isMain = Object.keys(main).length !== 0;
 
+  console.log(projectsList);
+
   return (
     <section
       className={clsx(
