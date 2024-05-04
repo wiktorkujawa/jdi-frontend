@@ -1,5 +1,6 @@
 import CAllProjects from "@/components/organisms/CAllProjects";
 import CBriefData from "@/components/organisms/CBriefData";
+import CMasthead from "@/components/organisms/CMastHead";
 import LCustomComponents from "@/components/templates/LCustomComponents";
 import { generateMeta } from "@/features/metadata";
 import {
@@ -22,9 +23,9 @@ export const generateMetadata  = async (): Promise<Metadata> => {
 
 const Home = async () => {
   const { customComponents } = await getPageData();
-
   return (
     <>
+        {/* <CMasthead /> */}
         <CBriefData arrowScroll="list" />
         <CAllProjects />
         <LCustomComponents field={customComponents} />

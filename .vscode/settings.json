@@ -5,6 +5,9 @@
     "*.css": "postcss",
     "css": "css"
   },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
   "scss.validate": false,
   "stylelint.validate": ["css", "scss"],
   "editor.tabSize": 2,
