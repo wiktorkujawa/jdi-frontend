@@ -93,18 +93,18 @@ const MSlider = ({ slides, settings }: SliderProps) => {
             }, }) => (
               <div key={id} className={`keen-slider__slide`}>
 
-                <div className='absolute whitespace-normal flex flex-col justify-center z-50 top-0 pl-6 pt-28 pb-12 left-0 h-full w-1/2' >
-                  <h3 className='text-4xl font-bold pb-2'>{heading}</h3>
+                <div className='absolute whitespace-normal flex flex-col justify-center z-50 top-0 pl-6 pt-14 pb-12 left-0 h-full lg:w-1/2 w-11/12' >
+                  <h3 className='lg:text-h2 md:text-h4 text-h5 font-bold pb-2'>{heading}</h3>
 
-                  {!!copy && <ORichText copy={copy} />}
+                  {!!copy && <div className='lg:line-clamp-none line-clamp-3 child:inline'><ORichText copy={copy} /></div>}
                   <Link className='py-2 px-4 o-theme-window w-fit mt-5 rounded-full' href={button.url}>{button.text}</Link>
                 </div>
 
-                <div dangerouslySetInnerHTML={{ __html: attribution || '' }} className='absolute z-50 bottom-4 right-4' />
+                <div dangerouslySetInnerHTML={{ __html: attribution || '' }} className='absolute max-w-40 md:max-w-none z-50 bottom-5 right-5' />
 
 
                 {resource_type === "video" ? (
-                  <div className="o-aspect-ratio o-aspect-ratio--2:1 overflow-hidden">
+                  <div className="o-aspect-ratio o-aspect-ratio--2:1 overflow-hidden min-h-80">
                     <video
                       poster="logowhite.svg"
                       className="lazy o-aspect-ratio__content opacity-50 object-cover mx-auto transition-transform"
@@ -116,7 +116,7 @@ const MSlider = ({ slides, settings }: SliderProps) => {
                     />
                   </div>
                 ) : (
-                  <div className="o-aspect-ratio o-aspect-ratio--2:1 overflow-hidden">
+                  <div className="o-aspect-ratio o-aspect-ratio--2:1 overflow-hidden min-h-80">
                     <Image
                       fill
                       src={filename}
@@ -136,6 +136,7 @@ const MSlider = ({ slides, settings }: SliderProps) => {
               return (
                 <button
                   key={idx}
+                  aria-label={`Slide ${idx + 1}`}
                   onClick={() => {
                     instanceRef.current?.moveToIdx(idx)
                   }}
