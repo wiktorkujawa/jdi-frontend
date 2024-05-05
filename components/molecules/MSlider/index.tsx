@@ -1,34 +1,55 @@
+'use client'
 import { useKeenSlider } from 'keen-slider/react'
 import React, { useState } from 'react'
-import "./styles.css"
 import "keen-slider/keen-slider.min.css"
+import { SliderProps } from '@/interfaces'
+import Image from 'next/image'
+import styles from './MSlider.module.css';
+import clsx from 'clsx'
+import ORichText from '@/features/ORichText'
+import AButton from '@/components/atoms/AButton'
+import Link from 'next/link'
 
-type Props = {
-    slides: Slide[]
+function Arrow(props: {
+  disabled: boolean
+  left?: boolean
+  onClick: (e: any) => void
+}) {
+  const disabled = props.disabled ? " arrow--disabled" : ""
+  return (
+    <svg
+      onClick={props.onClick}
+      className={`arrow ${props.left ? "arrow--left" : "arrow--right"
+        } ${disabled}`}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      {props.left && (
+        <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
+      )}
+      {!props.left && (
+        <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+      )}
+    </svg>
+  )
 }
 
-type Slide = {
-    albumId: number,
-    id: number,
-    title: string,
-    url: string,
-    thumbnailUrl: string
-}
 
-
-const Slider = ({ slides }: Props) => {
-    const [currentSlide, setCurrentSlide] = React.useState(0)
-    const [loaded, setLoaded] = useState(false)
-    const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
-      initial: 0,
-      slideChanged(slider) {
-        setCurrentSlide(slider.track.details.rel)
-      },
-      created() {
-        setLoaded(true)
-      },
+const MSlider = ({ slides, settings }: SliderProps) => {
+  const [currentSlide, setCurrentSlide] = React.useState(0)
+  const [loaded, setLoaded] = useState(false)
+  const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
+    initial: 0,
+    loop: settings.loop,
+    drag: settings.draggable,
+    slideChanged(slider) {
+      setCurrentSlide(slider.track.details.rel)
     },
-    [
+    created() {
+      setLoaded(true)
+    },
+  },
+    settings.autoplay ? [
       (slider) => {
         let timeout: ReturnType<typeof setTimeout>
         let mouseOver = false
@@ -40,7 +61,7 @@ const Slider = ({ slides }: Props) => {
           if (mouseOver) return
           timeout = setTimeout(() => {
             slider.next()
-          }, 2000)
+          }, settings.autoplaySpeed)
         }
         slider.on("created", () => {
           slider.container.addEventListener("mouseover", () => {
@@ -57,87 +78,99 @@ const Slider = ({ slides }: Props) => {
         slider.on("animationEnded", nextTimeout)
         slider.on("updated", nextTimeout)
       },
-    ])
-  
-    return (
-      <>
-        <div className="navigation-wrapper">
-          <div ref={sliderRef} className="keen-slider">
-            {
-                !!slides.length && slides?.map((slide) => (
-                    <div key={slide.id} className={`keen-slider__slide number-slide1`}>
-                        <img style={{ objectFit: 'cover'}} src={slide.url} alt={slide.title} />
-                    </div>
-                ))
-            }
-          </div>
-          {/* {loaded && instanceRef.current && (
-            <>
-              <Arrow
-                left
-                onClick={(e: any) =>
-                  e.stopPropagation() || instanceRef.current?.prev()
-                }
-                disabled={currentSlide === 0}
-              />
-  
-              <Arrow
-                onClick={(e: any) =>
-                  e.stopPropagation() || instanceRef.current?.next()
-                }
-                disabled={
-                  currentSlide ===
-                  instanceRef.current.track.details.slides.length - 1
-                }
-              />
-            </>
-          )} */}
-  
-  {loaded && instanceRef.current && !!slides.length && (
-          <div className="dots">
-            {slides.map((_,idx) => {
+    ] : []
+  )
+
+  return (
+    <>
+      <div className={styles["navigation-wrapper"]}>
+        <div ref={sliderRef} className="keen-slider">
+          {
+            slides?.map(({ id, heading, copy, button, attribution, media: {
+              cloudinary: { resource_type, original_filename },
+              url,
+              filename
+            }, }) => (
+              <div key={id} className={`keen-slider__slide`}>
+
+                <div className='absolute whitespace-normal flex flex-col justify-center z-50 top-0 pl-6 pt-28 pb-12 left-0 h-full w-1/2' >
+                  <h3 className='text-4xl font-bold pb-2'>{heading}</h3>
+
+                  {!!copy && <ORichText copy={copy} />}
+                  <Link className='py-2 px-4 o-theme-window w-fit mt-5 rounded-full' href={button.url}>{button.text}</Link>
+                </div>
+
+                <div dangerouslySetInnerHTML={{ __html: attribution || '' }} className='absolute z-50 bottom-4 right-4' />
+
+
+                {resource_type === "video" ? (
+                  <div className="o-aspect-ratio o-aspect-ratio--2:1 overflow-hidden">
+                    <video
+                      poster="logowhite.svg"
+                      className="lazy o-aspect-ratio__content opacity-50 object-cover mx-auto transition-transform"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      src={url}
+                    />
+                  </div>
+                ) : (
+                  <div className="o-aspect-ratio o-aspect-ratio--2:1 overflow-hidden">
+                    <Image
+                      fill
+                      src={filename}
+                      sizes={`(max-width: 1024px) 100vw, 50vw`}
+                      className="o-aspect-ratio__content opacity-50 object-cover mx-auto transition-transform"
+                      alt={original_filename}
+                    />
+                  </div>
+                )}
+              </div>
+            ))
+          }
+        </div>
+        {loaded && instanceRef.current && settings.dots && (
+          <div className={styles.dots}>
+            {slides.map((_, idx) => {
               return (
                 <button
                   key={idx}
                   onClick={() => {
                     instanceRef.current?.moveToIdx(idx)
                   }}
-                  className={"dot" + (currentSlide === idx ? " active" : "")}
+                  className={clsx(styles.dot, currentSlide === idx && styles.active)}
                 ></button>
               )
             })}
           </div>
         )}
-        </div>
-        
-      </>
-    )
-  }
 
-export default Slider;
+        {loaded && instanceRef.current && settings.arrows && (
+          <>
+            <Arrow
+              left
+              onClick={(e: any) =>
+                e.stopPropagation() || instanceRef.current?.prev()
+              }
+              disabled={currentSlide === 0}
+            />
 
+            <Arrow
+              onClick={(e: any) =>
+                e.stopPropagation() || instanceRef.current?.next()
+              }
+              disabled={
+                currentSlide ===
+                instanceRef.current.track.details.slides.length - 1
+              }
+            />
+          </>
+        )}
+      </div>
 
-// function Arrow(props: {
-//     disabled: boolean
-//     left?: boolean
-//     onClick: (e: any) => void
-//   }) {
-//     const disabled = props.disabled ? " arrow--disabled" : ""
-//     return (
-//       <svg
-//         onClick={props.onClick}
-//         className={`arrow ${
-//           props.left ? "arrow--left" : "arrow--right"
-//         } ${disabled}`}
-//         xmlns="http://www.w3.org/2000/svg"
-//         viewBox="0 0 24 24"
-//       >
-//         {props.left && (
-//           <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
-//         )}
-//         {!props.left && (
-//           <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
-//         )}
-//       </svg>
-//     )
-//   }
+    </>
+  )
+}
+
+export default MSlider;

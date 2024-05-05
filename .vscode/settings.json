@@ -5,9 +5,14 @@
     "*.css": "postcss",
     "css": "css"
   },
+  "editor.defaultFormatter": "vscode.typescript-language-features",
+  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit"
+    "source.fixAll": "always"
   },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+},
   "scss.validate": false,
   "stylelint.validate": ["css", "scss"],
   "editor.tabSize": 2,

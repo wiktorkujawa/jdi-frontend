@@ -22,10 +22,12 @@ export const generateMetadata  = async (): Promise<Metadata> => {
 };
 
 const Home = async () => {
-  const { customComponents } = await getPageData();
+  const { customComponents, masthead: [ content ] } = await getPageData();
   return (
     <>
-        {/* <CMasthead /> */}
+        <CMasthead field={{
+          slider: content
+        }} />
         <CBriefData arrowScroll="list" />
         <CAllProjects />
         <LCustomComponents field={customComponents} />

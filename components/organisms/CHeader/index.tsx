@@ -1,9 +1,5 @@
-import styles from "./CHeader.module.css";
-import Link from "next/link";
-import Logo from "@/public/logo.svg";
-import MNavigation from "@/components/molecules/MNavigation";
-import clsx from "clsx";
 import { IData } from "@/interfaces";
+import MNavigation from "@/components/molecules/MNavigation";
 
 const getHeaderData = async () => {
   const res = await fetch(`${process.env.API_URL}globals/navigation`, {
@@ -18,22 +14,7 @@ const getHeaderData = async () => {
 const CHeader = async () => {
 
   const { page, pages } = await getHeaderData();
-
-  return (
-    <header
-      className={clsx(
-        styles.wrapperComponent,
-        "dark:bg-dark-bg-window bg-theme-bg-window dark:text-dark-font-primary text-theme-font-primary"
-      )}
-    >
-      <div className={styles.content}>
-        <Link href={"/"}>
-          <Logo className={clsx(styles.logo, "dark:fill-white")} />
-        </Link>
-        <MNavigation nav={[...page, ...pages]} />
-      </div>
-    </header>
-  );
+  return <MNavigation nav={[...page, ...pages]} />;
 };
 
 export default CHeader;
