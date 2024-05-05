@@ -37,7 +37,12 @@ body {
 
 main {
   @apply dark:text-dark-font-primary text-theme-font-primary dark:bg-dark-bg bg-theme-bg;
-  padding-top: calc(var(--header-height) + 15px);
+  
+   &:not(:has(.c-masthead)) {
+    padding-top: calc(var(--header-height) + 15px);
+  }
+
+
   min-height: 100vh;
 
   > :last-child {
@@ -101,4 +106,3 @@ a {
 .wasm-container {
   margin-top: 4rem;
 }
-
