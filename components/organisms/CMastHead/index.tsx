@@ -1,10 +1,21 @@
+import MSlider from '@/components/molecules/MSlider'
+import { SliderProps } from '@/interfaces'
 import React from 'react'
 
-type Props = {}
+type Props = {
+  field: {
+    slider: SliderProps
+  }
+}
 
-const CMasthead = (props: Props) => {
+const CMasthead = ({ field: { slider: {
+  settings,
+  slides
+} } }: Props) => {
   return (
-    <div className='w-full bg-red-500 h-96'>CMasthead</div>
+    <section className="c-masthead">
+      {settings && slides && <MSlider settings={settings} slides={slides} />}
+    </section>
   )
 }
 

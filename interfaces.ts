@@ -49,10 +49,36 @@ export interface PageContent {
   name: string;
   slug: string;
   subpages?: PageContent[];
+  isMasthead: boolean;
+  masthead: SliderProps[];
   customComponents: any[];
   meta: IMetaData;
   createdAt: string;
   updatedAt: string;
+}
+
+export type SliderProps = {
+  settings: SliderSettings;
+  slides: SlidesProps[];
+}
+
+export type SlidesProps = {
+  id: string;
+  button: Button;
+  media: Upload;
+  copy?: ICopy[];
+  heading?: string;
+  attribution?: string;
+}
+
+type SliderSettings = {
+  dots: boolean;
+  loop: boolean;
+  draggable: boolean;
+  arrows: boolean;
+  autoplay: boolean;
+  autoplaySpeed: number;
+  slidesPerRow: number;
 }
 
 export interface Upload {
@@ -104,6 +130,6 @@ export interface ICopy {
 export type CustomComponentType = {
   field: {
     blockType: string;
-    [model: string]: any; 
+    [model: string]: any;
   }
 }
