@@ -84,7 +84,7 @@ const MSlider = ({ slides, settings }: SliderProps) => {
   return (
     <>
       <div className={styles["navigation-wrapper"]}>
-        <div ref={sliderRef} className="keen-slider">
+        <div ref={sliderRef} className="keen-slider max-h-screen">
           {
             slides?.map(({ id, heading, copy, button, attribution, media: {
               cloudinary: { resource_type, original_filename },
@@ -100,7 +100,7 @@ const MSlider = ({ slides, settings }: SliderProps) => {
                   <Link className='py-2 px-4 o-theme-window w-fit mt-5 rounded-full' href={button.url}>{button.text}</Link>
                 </div>
 
-                <div dangerouslySetInnerHTML={{ __html: attribution || '' }} className='absolute max-w-40 md:max-w-none z-50 bottom-5 right-5' />
+                <div dangerouslySetInnerHTML={{ __html: attribution || '' }} className='absolute max-w-36 md:max-w-none z-50 bottom-5 right-5' />
 
 
                 {resource_type === "video" ? (
