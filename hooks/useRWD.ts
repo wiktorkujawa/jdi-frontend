@@ -1,3 +1,4 @@
+import { TABLET_WIDTH } from '@/consts';
 import { useState, useEffect } from 'react';
 
 const useRWD = () => {
@@ -5,11 +6,11 @@ const useRWD = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1024);
+      setIsDesktop(window.innerWidth >= TABLET_WIDTH);
     };
 
     if (typeof window !== 'undefined') {
-      setIsDesktop(window.innerWidth >= 1024);
+      setIsDesktop(window.innerWidth >= TABLET_WIDTH);
       window.addEventListener('resize', handleResize);
 
       return () => {
