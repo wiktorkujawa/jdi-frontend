@@ -16,21 +16,22 @@ const getPageData = async () => {
   return docs[0];
 };
 
-export const generateMetadata  = async (): Promise<Metadata> => {
+export const generateMetadata = async (): Promise<Metadata> => {
   const { meta, slug } = await getPageData();
   return generateMeta(meta, slug);
 };
 
 const Home = async () => {
-  const { customComponents, masthead: [ content ] } = await getPageData();
+  const { customComponents, mastheadSlider } = await getPageData();
+
   return (
     <>
-        <CMasthead field={{
-          slider: content
-        }} />
-        <CBriefData arrowScroll="list" />
-        <CAllProjects />
-        <LCustomComponents field={customComponents} />
+      <CMasthead field={{
+        slider: mastheadSlider
+      }} />
+      <CBriefData arrowScroll="list" />
+      <CAllProjects />
+      <LCustomComponents field={customComponents} />
     </>
   );
 };
