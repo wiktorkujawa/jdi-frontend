@@ -51,7 +51,7 @@ const MNavigation: FC<Props> = ({ nav }) => {
     >
       <div className={clsx("absolute transition-transform left-0 top-0 h-full w-full -translate-y-full bg-theme-bg-window dark:bg-dark-bg-window", (scrolling || (openNav && !isDesktop)) && "translate-y-0")} />
       <div className={styles.content}>
-        <Link className='z-10' href={"/"}>
+        <Link aria-label="Homepage" className='z-10' href={"/"}>
           <Logo className={clsx(styles.logo, "dark:fill-white")} />
         </Link>
         <button

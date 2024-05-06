@@ -40,7 +40,7 @@ const MProjectItem = ({
               <h3 className={clsx(styles["m-project-item--header"])}>
                 Project{" "}
               </h3>
-              <h3 className="text-h3 font-bold mb-4">{name}</h3>
+              <h4 className="text-h3 font-bold mb-4">{name}</h4>
             </>
           )}
 
@@ -77,14 +77,14 @@ const MProjectItem = ({
           {
             buttons?.map(({ button }) => {
               return (
-                <AButton key={button.url} className="w-full flex justify-center lg:w-auto" href={button.url} target="_blank">
+                <AButton aria-label={button.text} key={button.url} className="w-full flex justify-center lg:w-auto" href={button.url} target="_blank">
                   {button.text}
                 </AButton>
               );
             })
           }
         </div>
-        {main && <AButton href={button.url} target="_blank">
+        {main && <AButton aria-label={button.text} href={button.url} target="_blank">
           {button.text}
         </AButton>}
       </div>
