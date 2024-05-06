@@ -1,55 +1,41 @@
-'use client'
-import { useKeenSlider } from 'keen-slider/react'
-import React, { useState } from 'react'
-import "keen-slider/keen-slider.min.css"
-import { SliderProps } from '@/interfaces'
-import Image from 'next/image'
+'use client';
+import { useKeenSlider } from 'keen-slider/react';
+import React, { useState } from 'react';
+import "keen-slider/keen-slider.min.css";
+import { SliderProps } from '@/interfaces';
+import Image from 'next/image';
 import styles from './MSlider.module.css';
-import clsx from 'clsx'
-import ORichText from '@/features/ORichText'
-import AButton from '@/components/atoms/AButton'
-import Link from 'next/link'
+import ORichText from '@/features/ORichText';
+import Link from 'next/link';
+import useRWD from '@/hooks/useRWD';
+import dynamic from 'next/dynamic';
+import { TABLET_WIDTH } from '@/consts';
 
-function Arrow(props: {
-  disabled: boolean
-  left?: boolean
-  onClick: (e: any) => void
-}) {
-  const disabled = props.disabled ? " arrow--disabled" : ""
-  return (
-    <svg
-      onClick={props.onClick}
-      className={`arrow ${props.left ? "arrow--left" : "arrow--right"
-        } ${disabled}`}
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-    >
-      {props.left && (
-        <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
-      )}
-      {!props.left && (
-        <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
-      )}
-    </svg>
-  )
-}
+const Dots = dynamic(() => import('./partials/Dots'));
+const Arrows = dynamic(() => import('./partials/Arrows'));
 
-
-const MSlider = ({ slides, settings }: SliderProps) => {
+const MSlider = ({ slides, settings: { mobile, desktop } }: SliderProps) => {
   const [currentSlide, setCurrentSlide] = React.useState(0)
-  const [loaded, setLoaded] = useState(false)
+  const [loaded, setLoaded] = useState(false);
+  const { isDesktop } = useRWD();
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
-    loop: settings.loop,
-    drag: settings.draggable,
+    loop: mobile.loop,
+    drag: mobile.draggable,
     slideChanged(slider) {
       setCurrentSlide(slider.track.details.rel)
     },
     created() {
       setLoaded(true)
     },
+    breakpoints: {
+      [`(min-width: ${TABLET_WIDTH}px)`]: {
+        loop: desktop.loop,
+        drag: desktop.draggable,
+      }
+    }
   },
-    settings.autoplay ? [
+    ((mobile.autoplay && !isDesktop) || (desktop.autoplay && isDesktop)) ? [
       (slider) => {
         let timeout: ReturnType<typeof setTimeout>
         let mouseOver = false
@@ -61,7 +47,7 @@ const MSlider = ({ slides, settings }: SliderProps) => {
           if (mouseOver) return
           timeout = setTimeout(() => {
             slider.next()
-          }, settings.autoplaySpeed)
+          }, isDesktop ? desktop.autoplaySpeed : mobile.autoplaySpeed)
         }
         slider.on("created", () => {
           slider.container.addEventListener("mouseover", () => {
@@ -78,13 +64,13 @@ const MSlider = ({ slides, settings }: SliderProps) => {
         slider.on("animationEnded", nextTimeout)
         slider.on("updated", nextTimeout)
       },
-    ] : []
-  )
+    ] : [],
+  );
 
   return (
     <>
       <div className={styles["navigation-wrapper"]}>
-        <div ref={sliderRef} className="keen-slider">
+        <div ref={sliderRef} className="keen-slider max-h-screen">
           {
             slides?.map(({ id, heading, copy, button, attribution, media: {
               cloudinary: { resource_type, original_filename },
@@ -100,7 +86,7 @@ const MSlider = ({ slides, settings }: SliderProps) => {
                   <Link className='py-2 px-4 o-theme-window w-fit mt-5 rounded-full' href={button.url}>{button.text}</Link>
                 </div>
 
-                <div dangerouslySetInnerHTML={{ __html: attribution || '' }} className='absolute max-w-40 md:max-w-none z-50 bottom-5 right-5' />
+                <div dangerouslySetInnerHTML={{ __html: attribution || '' }} className='absolute max-w-36 md:max-w-none z-50 bottom-5 right-5' />
 
 
                 {resource_type === "video" ? (
@@ -120,7 +106,7 @@ const MSlider = ({ slides, settings }: SliderProps) => {
                     <Image
                       fill
                       src={filename}
-                      sizes={`(max-width: 1024px) 100vw, 50vw`}
+                      sizes={`(max-width: ${TABLET_WIDTH}px) 100vw, 50vw`}
                       className="o-aspect-ratio__content opacity-50 object-cover mx-auto transition-transform"
                       alt={original_filename}
                     />
@@ -130,48 +116,32 @@ const MSlider = ({ slides, settings }: SliderProps) => {
             ))
           }
         </div>
-        {loaded && instanceRef.current && settings.dots && (
-          <div className={styles.dots}>
-            {slides.map((_, idx) => {
-              return (
-                <button
-                  key={idx}
-                  aria-label={`Slide ${idx + 1}`}
-                  onClick={() => {
-                    instanceRef.current?.moveToIdx(idx)
-                  }}
-                  className={clsx(styles.dot, currentSlide === idx && styles.active)}
-                ></button>
+
+        {
+          loaded && instanceRef.current && (
+            <>
+              {isDesktop ? (
+                <>
+                  {desktop.dots && <Dots slides={slides} currentSlide={currentSlide} instanceRef={instanceRef} />}
+                  {desktop.arrows && <Arrows currentSlide={currentSlide} instanceRef={instanceRef} />}
+                </>
+
+              ) : (
+                <>
+                  {mobile.dots && <Dots slides={slides} currentSlide={currentSlide} instanceRef={instanceRef} />}
+                  {mobile.arrows && <Arrows currentSlide={currentSlide} instanceRef={instanceRef} />}
+                </>
               )
-            })}
-          </div>
-        )}
+              }
 
-        {loaded && instanceRef.current && settings.arrows && (
-          <>
-            <Arrow
-              left
-              onClick={(e: any) =>
-                e.stopPropagation() || instanceRef.current?.prev()
-              }
-              disabled={currentSlide === 0}
-            />
-
-            <Arrow
-              onClick={(e: any) =>
-                e.stopPropagation() || instanceRef.current?.next()
-              }
-              disabled={
-                currentSlide ===
-                instanceRef.current.track.details.slides.length - 1
-              }
-            />
-          </>
-        )}
+            </>
+          )
+        }
       </div>
 
     </>
   )
-}
+};
 
 export default MSlider;
+

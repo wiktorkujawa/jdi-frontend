@@ -1,4 +1,5 @@
 'use client';
+import { TABLET_WIDTH } from '@/consts';
 import useCanvasScroll from '@/hooks/useCanvasScroll';
 import { useEffect, useState } from 'react'
 
@@ -18,10 +19,10 @@ const CApp = () => {
       Module.get("../assets/wasm/runIndex.js", () => {
         console.log("run index loaded");
       });
-        document
-          ?.getElementById('canvas')
-          ?.addEventListener("wheel", handleScroll);
-  
+      document
+        ?.getElementById('canvas')
+        ?.addEventListener("wheel", handleScroll);
+
     };
     setTimeout(() => setStartApp(true), 1000);
     if (typeof document !== "undefined" && startApp) {
@@ -37,18 +38,18 @@ const CApp = () => {
   useCanvasScroll('canvas');
   return (
     <div>
-          {startApp && (
-            <div className="mx-4 overflow-x-auto">
-              <canvas
-                className="emscripten min-w-[1024px]"
-                id="canvas"
-                onContextMenu={(e) => {
-                  e.preventDefault();
-                }}
-              />
-            </div>
-          )}
+      {startApp && (
+        <div className="mx-4 overflow-x-auto">
+          <canvas
+            className={`emscripten min-w-[${TABLET_WIDTH}px]`}
+            id="canvas"
+            onContextMenu={(e) => {
+              e.preventDefault();
+            }}
+          />
         </div>
+      )}
+    </div>
   )
 }
 

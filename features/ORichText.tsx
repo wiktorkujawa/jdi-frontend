@@ -1,3 +1,4 @@
+import { TABLET_WIDTH } from "@/consts";
 import { ICopy, Upload } from "@/interfaces";
 import Image from "next/image";
 import Link from "next/link";
@@ -51,7 +52,7 @@ const Children: FC<ICopy> = ({
           <Image
             fill
             src={value.filename}
-            sizes={`(max-width: 1024px) 100vw, 50vw`}
+            sizes={`(max-width: ${TABLET_WIDTH}px) 100vw, 50vw`}
             className="o-aspect-ratio__content object-cover mx-auto"
             alt={original_filename}
           />

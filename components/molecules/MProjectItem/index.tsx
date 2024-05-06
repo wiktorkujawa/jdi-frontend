@@ -4,6 +4,7 @@ import AButton from "@/components/atoms/AButton";
 import styles from "./MProjectItem.module.css";
 import clsx from "clsx";
 import Image from "next/image";
+import { TABLET_WIDTH } from "@/consts";
 
 type Props = {
   field: Project;
@@ -44,14 +45,14 @@ const MProjectItem = ({
           )}
 
           {resource_type === "video" ? (
-            <div className="o-aspect-ratio o-aspect-ratio--2:1 overflow-hidden">      
+            <div className="o-aspect-ratio o-aspect-ratio--2:1 overflow-hidden">
               <video
                 poster="logowhite.svg"
                 className="lazy o-aspect-ratio__content object-contain mx-auto hover:scale-150 transition-transform"
                 autoPlay
                 muted
                 loop
-                playsInline 
+                playsInline
                 src={url}
               />
             </div>
@@ -60,7 +61,7 @@ const MProjectItem = ({
               <Image
                 fill
                 src={filename}
-                sizes={`(max-width: 1024px) 100vw, 50vw`}
+                sizes={`(max-width: ${TABLET_WIDTH}px) 100vw, 50vw`}
                 className="o-aspect-ratio__content object-contain mx-auto hover:scale-150 transition-transform"
                 alt={original_filename}
               />
@@ -69,23 +70,23 @@ const MProjectItem = ({
         </Link>
       </figure>
 
-<div className="flex flex-col justify-between">
-      {!main && <p className="mt-4">{description}</p>}
+      <div className="flex flex-col justify-between">
+        {!main && <p className="mt-4">{description}</p>}
 
-      <div className="flex flex-wrap justify-between">
-      {
-        buttons?.map(({button}) => {
-          return (
-            <AButton key={button.url} className="w-full flex justify-center lg:w-auto" href={button.url} target="_blank">
-              {button.text}
-            </AButton>
-          );
-        })
-      }
-      </div>
-     { main && <AButton href={button.url} target="_blank">
-        {button.text}
-      </AButton>}
+        <div className="flex flex-wrap justify-between">
+          {
+            buttons?.map(({ button }) => {
+              return (
+                <AButton key={button.url} className="w-full flex justify-center lg:w-auto" href={button.url} target="_blank">
+                  {button.text}
+                </AButton>
+              );
+            })
+          }
+        </div>
+        {main && <AButton href={button.url} target="_blank">
+          {button.text}
+        </AButton>}
       </div>
     </article>
   );

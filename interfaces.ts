@@ -50,7 +50,8 @@ export interface PageContent {
   slug: string;
   subpages?: PageContent[];
   isMasthead: boolean;
-  masthead: SliderProps[];
+  feature: string;
+  mastheadSlider: SliderProps;
   customComponents: any[];
   meta: IMetaData;
   createdAt: string;
@@ -58,7 +59,10 @@ export interface PageContent {
 }
 
 export type SliderProps = {
-  settings: SliderSettings;
+  settings: {
+    desktop: SliderSettings;
+    mobile: SliderSettings;
+  };
   slides: SlidesProps[];
 }
 
