@@ -12,7 +12,7 @@ import dynamic from 'next/dynamic';
 import { TABLET_WIDTH } from '@/consts';
 
 const Dots = dynamic(() => import('./partials/Dots'));
-const Arrows = dynamic(() => import('./partials/Arrows'));
+// const Arrows = dynamic(() => import('./partials/Arrows'));
 
 const MSlider = ({ slides, settings: { mobile, desktop } }: SliderProps) => {
   const [currentSlide, setCurrentSlide] = React.useState(0)
@@ -123,13 +123,13 @@ const MSlider = ({ slides, settings: { mobile, desktop } }: SliderProps) => {
               {isDesktop ? (
                 <>
                   {desktop.dots && <Dots slides={slides} currentSlide={currentSlide} instanceRef={instanceRef} />}
-                  {desktop.arrows && <Arrows currentSlide={currentSlide} instanceRef={instanceRef} />}
+                  {/* {desktop.arrows && <Arrows currentSlide={currentSlide} instanceRef={instanceRef} />} */}
                 </>
 
               ) : (
                 <>
                   {mobile.dots && <Dots slides={slides} currentSlide={currentSlide} instanceRef={instanceRef} />}
-                  {mobile.arrows && <Arrows currentSlide={currentSlide} instanceRef={instanceRef} />}
+                  {/* {mobile.arrows && <Arrows currentSlide={currentSlide} instanceRef={instanceRef} />} */}
                 </>
               )
               }
