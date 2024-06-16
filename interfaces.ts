@@ -63,6 +63,7 @@ export type SliderProps = {
     desktop: SliderSettings;
     mobile: SliderSettings;
   };
+  lazy?: boolean;
   slides: SlidesProps[];
 }
 
