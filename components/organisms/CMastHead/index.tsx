@@ -14,7 +14,7 @@ const CMasthead = ({ field: { slider: {
 } } }: Props) => {
   return (
     <section className="c-masthead">
-      {settings && slides && <MSlider settings={settings} slides={slides} />}
+      {settings && slides && <MSlider lazy={false} settings={settings} slides={slides} />}
     </section>
   )
 }
