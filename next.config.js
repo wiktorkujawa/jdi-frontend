@@ -1,3 +1,17 @@
+
+const getCorsHeaders = () => {
+  const headers = {};
+
+  headers["Access-Control-Allow-Origin"] = "*";
+  headers["Access-Control-Allow-Credentials"] = "true";
+  headers["Access-Control-Allow-Methods"] =
+    "GET,OPTIONS,PATCH,DELETE,POST,PUT";
+  headers["Access-Control-Allow-Headers"] =
+    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization";
+
+  return Object.entries(headers).map(([key, value]) => ({ key, value }));
+};
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack(config) {
@@ -7,6 +21,46 @@ const nextConfig = {
     })
 
     return config
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/wasm-test',
+        destination: `https://prismatic-shortbread-d520b8.netlify.app`,
+      },
+      {
+        source: '/wasm-test/:path*',
+        destination: `https://prismatic-shortbread-d520b8.netlify.app/:path*`,
+      },
+      {
+        source: '/wasm-shuttle',
+        destination: `https://bevy-game.shuttleapp.rs`,
+      },
+      {
+        source: '/wasm-shuttle/:path*',
+        destination: `https://bevy-game.shuttleapp.rs/:path*`,
+      }
+    ]
+  },
+  headers: async () => {
+    return [
+      {
+        source: "/wasm-test",
+        headers: getCorsHeaders(),
+      },
+      {
+        source: "/wasm-test/:path*",
+        headers: getCorsHeaders(),
+      },
+      {
+        source: "/wasm-shuttle",
+        headers: getCorsHeaders(),
+      },
+      {
+        source: "/wasm-shuttle/:path*",
+        headers: getCorsHeaders(),
+      },
+    ];
   },
   env: {
     API_URL: process.env.API_URL,
