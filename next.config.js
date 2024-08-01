@@ -25,39 +25,15 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/wasm-test',
-        destination: `https://prismatic-shortbread-d520b8.netlify.app`,
+        source: '/bevy-sandbox',
+        destination: `https://bevy-axum.netlify.app/`,
       },
-      {
-        source: '/wasm-test/:path*',
-        destination: `https://prismatic-shortbread-d520b8.netlify.app/:path*`,
-      },
-      {
-        source: '/wasm-shuttle',
-        destination: `https://bevy-game.shuttleapp.rs`,
-      },
-      {
-        source: '/wasm-shuttle/:path*',
-        destination: `https://bevy-game.shuttleapp.rs/:path*`,
-      }
     ]
   },
   headers: async () => {
     return [
       {
-        source: "/wasm-test",
-        headers: getCorsHeaders(),
-      },
-      {
-        source: "/wasm-test/:path*",
-        headers: getCorsHeaders(),
-      },
-      {
-        source: "/wasm-shuttle",
-        headers: getCorsHeaders(),
-      },
-      {
-        source: "/wasm-shuttle/:path*",
+        source: "/bevy-sandbox",
         headers: getCorsHeaders(),
       },
     ];
