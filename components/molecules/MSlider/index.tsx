@@ -10,11 +10,12 @@ import Link from 'next/link';
 import useRWD from '@/hooks/useRWD';
 import dynamic from 'next/dynamic';
 import { TABLET_WIDTH } from '@/consts';
+import clsx from 'clsx';
 
 const Dots = dynamic(() => import('./partials/Dots'));
-const Arrows = dynamic(() => import('./partials/Arrows'));
+// const Arrows = dynamic(() => import('./partials/Arrows'));
 
-const MSlider = ({ slides, settings: { mobile, desktop } }: SliderProps) => {
+const MSlider = ({ slides, settings: { mobile, desktop }, lazy = true }: SliderProps) => {
   const [currentSlide, setCurrentSlide] = React.useState(0)
   const [loaded, setLoaded] = useState(false);
   const { isDesktop } = useRWD();
@@ -93,7 +94,7 @@ const MSlider = ({ slides, settings: { mobile, desktop } }: SliderProps) => {
                   <div className="o-aspect-ratio o-aspect-ratio--2:1 overflow-hidden min-h-80">
                     <video
                       poster="logowhite.svg"
-                      className="lazy o-aspect-ratio__content opacity-50 object-cover mx-auto transition-transform"
+                      className={clsx("o-aspect-ratio__content opacity-50 object-cover mx-auto transition-transform", lazy && 'lazy')}
                       autoPlay
                       muted
                       loop
@@ -104,6 +105,7 @@ const MSlider = ({ slides, settings: { mobile, desktop } }: SliderProps) => {
                 ) : (
                   <div className="o-aspect-ratio o-aspect-ratio--2:1 overflow-hidden min-h-80">
                     <Image
+                      loading={lazy ? 'lazy' : 'eager'}
                       fill
                       src={filename}
                       sizes={`(max-width: ${TABLET_WIDTH}px) 100vw, 50vw`}
@@ -123,13 +125,13 @@ const MSlider = ({ slides, settings: { mobile, desktop } }: SliderProps) => {
               {isDesktop ? (
                 <>
                   {desktop.dots && <Dots slides={slides} currentSlide={currentSlide} instanceRef={instanceRef} />}
-                  {desktop.arrows && <Arrows currentSlide={currentSlide} instanceRef={instanceRef} />}
+                  {/* {desktop.arrows && <Arrows currentSlide={currentSlide} instanceRef={instanceRef} />} */}
                 </>
 
               ) : (
                 <>
                   {mobile.dots && <Dots slides={slides} currentSlide={currentSlide} instanceRef={instanceRef} />}
-                  {mobile.arrows && <Arrows currentSlide={currentSlide} instanceRef={instanceRef} />}
+                  {/* {mobile.arrows && <Arrows currentSlide={currentSlide} instanceRef={instanceRef} />} */}
                 </>
               )
               }
