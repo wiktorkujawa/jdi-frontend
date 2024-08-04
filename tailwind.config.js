@@ -9,19 +9,25 @@ module.exports = {
     "./features/*.{js,ts,jsx,tsx}",
   ],
   darkMode: 'class',
+  safelist: [
+    'shadow-menu'
+  ],
   theme: {
     extend: {
+      boxShadow: {
+        'menu': '0px 0.25rem 1rem 0px rgba(0, 0, 0, 0.15)'
+      },
       colors: {
         'dark-bg': '#030303',
         'dark-bg-window': '#1A1A1B',
         'dark-font-primary': '#D7DADC',
-        'dark-font-secondary':'#818384',
+        'dark-font-secondary': '#818384',
         'dark-border': '#343536',
-        
+
         'theme-bg': '#DAE0E6',
         'theme-bg-window': '#FFFFFF',
         'theme-font-primary': '#222222',
-        'theme-font-secondary':'#878A8C',
+        'theme-font-secondary': '#878A8C',
         'theme-border': '#ccc',
 
         menu: '#fdfdfd',
@@ -76,8 +82,8 @@ module.exports = {
   },
   plugins: [
     function ({ addVariant }) {
-        addVariant('child', '& > *');
-        addVariant('child-hover', '& > *:hover');
+      addVariant('child', '& > *');
+      addVariant('child-hover', '& > *:hover');
     }
-],
+  ],
 }
