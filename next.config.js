@@ -25,7 +25,7 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/bevy-sandbox',
+        source: '/wasm/bevy-sandbox',
         destination: `https://bevy-axum.netlify.app/`,
       },
     ]
@@ -33,7 +33,7 @@ const nextConfig = {
   headers: async () => {
     return [
       {
-        source: "/bevy-sandbox",
+        source: "/wasm/bevy-sandbox",
         headers: getCorsHeaders(),
       },
     ];

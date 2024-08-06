@@ -10,12 +10,12 @@ const iconsClasses: IconsClasses = {
   github: 'dark:fill-white'
 };
 
-const DynamicComponent = (name: string) => dynamic(() => import(`/public/assets/svg/${name}.svg`));
+const DynamicComponent = (name: string) => dynamic(() => import(`@/public/assets/svg/${name}.svg`));
 
-const Asvg: FC<any> = ({ name, className, ...props}) => {
+const Asvg: FC<any> = ({ name, className, ...props }) => {
   let Icon = DynamicComponent(name)
   return (
-    <Icon {...props} className={`${iconsClasses[name]} ${className}`}/>
+    <Icon {...props} className={`${iconsClasses[name]} ${className}`} />
   )
 }
 
