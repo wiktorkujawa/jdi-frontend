@@ -13,10 +13,10 @@ const CApp = () => {
     const InitWasm = async () => {
       const Module = (await import("scriptjs")).default;
 
-      Module.get("../assets/wasm/index.js", () => {
+      Module.get("../assets/index.js", () => {
         console.log("index loaded");
       });
-      Module.get("../assets/wasm/runIndex.js", () => {
+      Module.get("../assets/runIndex.js", () => {
         console.log("run index loaded");
       });
       document
