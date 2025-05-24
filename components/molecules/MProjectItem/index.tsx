@@ -40,7 +40,7 @@ const MProjectItem = ({
               <h3 className={clsx(styles["m-project-item--header"])}>
                 Project{" "}
               </h3>
-              <h4 className="text-h3 font-bold mb-4">{name}</h4>
+              <h4 title={name} className="text-h3 font-bold mb-4 line-clamp-1">{name}</h4>
             </>
           )}
 
@@ -71,7 +71,7 @@ const MProjectItem = ({
       </figure>
 
       <div className="flex flex-col justify-between">
-        {!main && <p className="mt-4">{description}</p>}
+        {!main && <p title={description} className="text-left mt-4 line-clamp-4 min-h-24 whitespace-pre-line">{description}</p>}
 
         <div className="flex flex-wrap justify-between">
           {
