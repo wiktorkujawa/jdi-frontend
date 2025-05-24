@@ -1,17 +1,3 @@
-
-const getCorsHeaders = () => {
-  const headers = {};
-
-  headers["Access-Control-Allow-Origin"] = "*";
-  headers["Access-Control-Allow-Credentials"] = "true";
-  headers["Access-Control-Allow-Methods"] =
-    "GET,OPTIONS,PATCH,DELETE,POST,PUT";
-  headers["Access-Control-Allow-Headers"] =
-    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization";
-
-  return Object.entries(headers).map(([key, value]) => ({ key, value }));
-};
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack(config) {
@@ -26,17 +12,13 @@ const nextConfig = {
     return [
       {
         source: '/wasm/bevy-sandbox',
-        destination: `https://bevy-axum.netlify.app/`,
+        destination: 'https://bevy-axum.netlify.app/',
+      },
+      {
+        source: '/wasm/assets/:path*',
+        destination: 'https://bevy-axum.netlify.app/assets/:path*',
       },
     ]
-  },
-  headers: async () => {
-    return [
-      {
-        source: "/wasm/bevy-sandbox",
-        headers: getCorsHeaders(),
-      },
-    ];
   },
   env: {
     API_URL: process.env.API_URL,
