@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- Disable zooming: -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+<head>
+    <!-- change this to your project name -->
+    <title>eframe template</title>
+
+    <!-- config for our rust wasm binary. go to https://trunkrs.dev/assets/#rust for more customization -->
+    
+    <!-- this is the base url relative to which other urls will be constructed. trunk will insert this from the public-url option -->
+    <base href="/" />
+
+    <link rel="icon" href="/favicon.ico"/>
+
+    
+    
+    
+    
+    
+    
+
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon_ios_touch_192.png">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="white">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#404040">
+
+</head>
+
+<body>
+    <!-- The WASM code will resize the canvas dynamically -->
+    <!-- the id is hardcoded in main.rs . so, make sure both match. -->
+
+    <canvas id="canvas"></canvas>
+
+    <script>
+        var Module = {
+            preRun: [],
+            postRun: [],
+            print: (function() {
+                return function(text) {
+                    text = Array.prototype.slice.call(arguments).join(' ');
+                    console.log(text);
+                };
+            })(),
+            printErr: function(text) {
+                text = Array.prototype.slice.call(arguments).join(' ');
+                console.error(text);
+            },
+            canvas: (function() {
+                var canvas = document.getElementById('canvas');
+                return canvas;
+            })(),
+            setStatus: function(text) {
+                console.log("status: " + text);
+            },
+            monitorRunDependencies: function(left) {
+                // no run dependencies to log
+            }
+        };
+
+        window.onerror = function() {
+            window.location.reload();
+            console.log(event);
+        };
+    </script>
+
+    <script src="/index.js"></script>
+
+</body>
+
+</html>
+
+<!-- Powered by egui: https://github.com/emilk/egui/ -->
